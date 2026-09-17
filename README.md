@@ -2,10 +2,14 @@
 
 Текущая версия: **V4.3.22**
 
-Исходник сайта хранится в архиве `FBG-V4.3.22-WORKING-NOINDEX.zip`.
+Статус: **рабочая версия**.
+
+Исходник V4.3.22 хранится в `pack/` и автоматически восстанавливается в `dist` командой `npm run build`.
 
 Индексация тестового сайта отключена двумя способами:
 - `robots.txt`: `Disallow: /`
 - HTTP header: `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet`
 
-Vercel автоматически распаковывает архив в `dist` при сборке.
+Vercel:
+- Build Command: `npm run build`
+- Output Directory: `dist`
