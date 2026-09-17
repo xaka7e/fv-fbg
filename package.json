@@ -1,0 +1,11 @@
+{
+  "name": "fbg-bau-v4-3-22",
+  "private": true,
+  "version": "4.3.22",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16"
+  }
+}
