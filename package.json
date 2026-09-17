@@ -4,8 +4,5 @@
   "version": "4.3.22",
   "scripts": {
     "build": "node build.js"
-  },
-  "dependencies": {
-    "adm-zip": "^0.5.16"
   }
 }
