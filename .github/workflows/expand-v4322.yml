@@ -3,7 +3,7 @@ name: Expand FBG V4.3.22
 on:
   push:
     paths:
-      - ".github/workflows/expand-v4322.yml"
+      - ".expand-trigger"
 
 permissions:
   contents: write
