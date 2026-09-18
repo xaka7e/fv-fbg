@@ -9,7 +9,3 @@
 Индексация поисковиками отключена:
 - `robots.txt`: `Disallow: /`
 - Vercel header: `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet`
-
-Сборка Vercel:
-- `npm run build`
-- output: `dist`

@@ -1,0 +1,546 @@
+[
+  {
+    "width": 320,
+    "height": 740,
+    "dims": {
+      "scene": 4000,
+      "vh": 740,
+      "vvh": 740,
+      "sticky": 740,
+      "overflow": 0
+    },
+    "errors": [],
+    "points": [
+      {
+        "y": 0,
+        "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+        "ty": 0,
+        "step": "01",
+        "eyebrow": "01 · EINSTIEG",
+        "progress": 0,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 652,
+        "transform": "matrix(0.962934, 0, 0, 0.962934, 3.17467, 13.0827)",
+        "ty": 13.0827,
+        "step": "02",
+        "eyebrow": "02 · TEAM",
+        "progress": 20,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 1467,
+        "transform": "matrix(1, 0, 0, 1, -1.88969, 164.457)",
+        "ty": 164.457,
+        "step": "03",
+        "eyebrow": "03 · SCHALUNG",
+        "progress": 45,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2445,
+        "transform": "matrix(1.03889, 0, 0, 1.03889, 3.8255, 320.705)",
+        "ty": 320.705,
+        "step": "04",
+        "eyebrow": "04 · ERFAHRUNG",
+        "progress": 75,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 3097,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0.11665, 323.236)",
+        "ty": 323.236,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 95,
+        "fertig": true,
+        "stickyTop": 0
+      },
+      {
+        "y": 3260,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 323)",
+        "ty": 323,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 100,
+        "fertig": true,
+        "stickyTop": 0
+      }
+    ]
+  },
+  {
+    "width": 360,
+    "height": 800,
+    "dims": {
+      "scene": 4000,
+      "vh": 800,
+      "vvh": 800,
+      "sticky": 800,
+      "overflow": 0
+    },
+    "errors": [],
+    "points": [
+      {
+        "y": 0,
+        "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+        "ty": 0,
+        "step": "01",
+        "eyebrow": "01 · EINSTIEG",
+        "progress": 0,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 640,
+        "transform": "matrix(0.962934, 0, 0, 0.962934, 3.17467, 15.0632)",
+        "ty": 15.0632,
+        "step": "02",
+        "eyebrow": "02 · TEAM",
+        "progress": 20,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 1440,
+        "transform": "matrix(1, 0, 0, 1, -1.88969, 191.457)",
+        "ty": 191.457,
+        "step": "03",
+        "eyebrow": "03 · SCHALUNG",
+        "progress": 45,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2400,
+        "transform": "matrix(1.03889, 0, 0, 1.03889, 3.8255, 373.959)",
+        "ty": 373.959,
+        "step": "04",
+        "eyebrow": "04 · ERFAHRUNG",
+        "progress": 75,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 3040,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0.11665, 377.236)",
+        "ty": 377.236,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 95,
+        "fertig": true,
+        "stickyTop": 0
+      },
+      {
+        "y": 3200,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 377)",
+        "ty": 377,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 100,
+        "fertig": true,
+        "stickyTop": 0
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "height": 812,
+    "dims": {
+      "scene": 4000,
+      "vh": 812,
+      "vvh": 812,
+      "sticky": 812,
+      "overflow": 0
+    },
+    "errors": [],
+    "points": [
+      {
+        "y": 0,
+        "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+        "ty": 0,
+        "step": "01",
+        "eyebrow": "01 · EINSTIEG",
+        "progress": 0,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 638,
+        "transform": "matrix(0.96294, 0, 0, 0.96294, 3.18563, 15.4692)",
+        "ty": 15.4692,
+        "step": "02",
+        "eyebrow": "02 · TEAM",
+        "progress": 20.0125,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 1435,
+        "transform": "matrix(1.00004, 0, 0, 1.00004, -1.90559, 196.969)",
+        "ty": 196.969,
+        "step": "03",
+        "eyebrow": "03 · SCHALUNG",
+        "progress": 45.0125,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2391,
+        "transform": "matrix(1.03889, 0, 0, 1.03889, 3.8255, 384.491)",
+        "ty": 384.491,
+        "step": "04",
+        "eyebrow": "04 · ERFAHRUNG",
+        "progress": 75,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 3029,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0.113793, 387.912)",
+        "ty": 387.912,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 95.0125,
+        "fertig": true,
+        "stickyTop": 0
+      },
+      {
+        "y": 3188,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 387.68)",
+        "ty": 387.68,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 100,
+        "fertig": true,
+        "stickyTop": 0
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "dims": {
+      "scene": 4000,
+      "vh": 844,
+      "vvh": 844,
+      "sticky": 844,
+      "overflow": 0
+    },
+    "errors": [],
+    "points": [
+      {
+        "y": 0,
+        "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+        "ty": 0,
+        "step": "01",
+        "eyebrow": "01 · EINSTIEG",
+        "progress": 0,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 631,
+        "transform": "matrix(0.962931, 0, 0, 0.962931, 3.16911, 16.4911)",
+        "ty": 16.4911,
+        "step": "02",
+        "eyebrow": "02 · TEAM",
+        "progress": 19.9937,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 1420,
+        "transform": "matrix(0.999982, 0, 0, 0.999982, -1.88164, 210.943)",
+        "ty": 210.943,
+        "step": "03",
+        "eyebrow": "03 · SCHALUNG",
+        "progress": 44.9937,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2367,
+        "transform": "matrix(1.03889, 0, 0, 1.03889, 3.8255, 412.578)",
+        "ty": 412.578,
+        "step": "04",
+        "eyebrow": "04 · ERFAHRUNG",
+        "progress": 75,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2998,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0.118106, 416.398)",
+        "ty": 416.398,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 94.9937,
+        "fertig": true,
+        "stickyTop": 0
+      },
+      {
+        "y": 3156,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 416.16)",
+        "ty": 416.16,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 100,
+        "fertig": true,
+        "stickyTop": 0
+      }
+    ]
+  },
+  {
+    "width": 393,
+    "height": 852,
+    "dims": {
+      "scene": 4000,
+      "vh": 852,
+      "vvh": 852,
+      "sticky": 852,
+      "overflow": 0
+    },
+    "errors": [],
+    "points": [
+      {
+        "y": 0,
+        "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+        "ty": 0,
+        "step": "01",
+        "eyebrow": "01 · EINSTIEG",
+        "progress": 0,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 630,
+        "transform": "matrix(0.96294, 0, 0, 0.96294, 3.18577, 16.7778)",
+        "ty": 16.7778,
+        "step": "02",
+        "eyebrow": "02 · TEAM",
+        "progress": 20.0127,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 1417,
+        "transform": "matrix(1.00004, 0, 0, 1.00004, -1.90579, 214.787)",
+        "ty": 214.787,
+        "step": "03",
+        "eyebrow": "03 · SCHALUNG",
+        "progress": 45.0127,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2361,
+        "transform": "matrix(1.03889, 0, 0, 1.03889, 3.8255, 419.6)",
+        "ty": 419.6,
+        "step": "04",
+        "eyebrow": "04 · ERFAHRUNG",
+        "progress": 75,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2991,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0.113757, 423.512)",
+        "ty": 423.512,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 95.0127,
+        "fertig": true,
+        "stickyTop": 0
+      },
+      {
+        "y": 3148,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 423.28)",
+        "ty": 423.28,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 100,
+        "fertig": true,
+        "stickyTop": 0
+      }
+    ]
+  },
+  {
+    "width": 414,
+    "height": 896,
+    "dims": {
+      "scene": 4000,
+      "vh": 896,
+      "vvh": 896,
+      "sticky": 896,
+      "overflow": 0
+    },
+    "errors": [],
+    "points": [
+      {
+        "y": 0,
+        "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+        "ty": 0,
+        "step": "01",
+        "eyebrow": "01 · EINSTIEG",
+        "progress": 0,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 621,
+        "transform": "matrix(0.962937, 0, 0, 0.962937, 3.18031, 18.2071)",
+        "ty": 18.2071,
+        "step": "02",
+        "eyebrow": "02 · TEAM",
+        "progress": 20.0064,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 1397,
+        "transform": "matrix(1.00002, 0, 0, 1.00002, -1.89786, 234.282)",
+        "ty": 234.282,
+        "step": "03",
+        "eyebrow": "03 · SCHALUNG",
+        "progress": 45.0064,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2328,
+        "transform": "matrix(1.03889, 0, 0, 1.03889, 3.8255, 458.218)",
+        "ty": 458.218,
+        "step": "04",
+        "eyebrow": "04 · ERFAHRUNG",
+        "progress": 75,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2949,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0.115179, 462.674)",
+        "ty": 462.674,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 95.0064,
+        "fertig": true,
+        "stickyTop": 0
+      },
+      {
+        "y": 3104,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 462.44)",
+        "ty": 462.44,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 100,
+        "fertig": true,
+        "stickyTop": 0
+      }
+    ]
+  },
+  {
+    "width": 430,
+    "height": 932,
+    "dims": {
+      "scene": 4000,
+      "vh": 932,
+      "vvh": 932,
+      "sticky": 932,
+      "overflow": 0
+    },
+    "errors": [],
+    "points": [
+      {
+        "y": 0,
+        "transform": "matrix(0.96, 0, 0, 0.96, 0, 0)",
+        "ty": 0,
+        "step": "01",
+        "eyebrow": "01 · EINSTIEG",
+        "progress": 0,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 614,
+        "transform": "matrix(0.96294, 0, 0, 0.96294, 3.18606, 19.3953)",
+        "ty": 19.3953,
+        "step": "02",
+        "eyebrow": "02 · TEAM",
+        "progress": 20.013,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 1381,
+        "transform": "matrix(1.00004, 0, 0, 1.00004, -1.90621, 250.424)",
+        "ty": 250.424,
+        "step": "03",
+        "eyebrow": "03 · SCHALUNG",
+        "progress": 45.013,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2301,
+        "transform": "matrix(1.03889, 0, 0, 1.03889, 3.8255, 489.816)",
+        "ty": 489.816,
+        "step": "04",
+        "eyebrow": "04 · ERFAHRUNG",
+        "progress": 75,
+        "fertig": false,
+        "stickyTop": 0
+      },
+      {
+        "y": 2915,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0.113682, 494.712)",
+        "ty": 494.712,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 95.013,
+        "fertig": true,
+        "stickyTop": 0
+      },
+      {
+        "y": 3068,
+        "transform": "matrix(1.04, 0, 0, 1.04, 0, 494.48)",
+        "ty": 494.48,
+        "step": "05",
+        "eyebrow": "05 · FERTIG",
+        "progress": 100,
+        "fertig": true,
+        "stickyTop": 0
+      }
+    ]
+  },
+  {
+    "reduced_motion_390": {
+      "step": "05",
+      "eyebrow": "05 · FERTIG",
+      "fertig": true,
+      "progress": 94.9937
+    },
+    "errors": []
+  },
+  {
+    "resize_390_to_430x740": {
+      "sticky": 740,
+      "overflow": 0,
+      "eyebrow": "01 · EINSTIEG"
+    },
+    "errors": []
+  },
+  {
+    "desktop_1440_smoke": {
+      "step": "03",
+      "panel": "translate(475.85925925925926 309)",
+      "trolley": "translate(20.85925925925926 0)",
+      "overflow": 0
+    },
+    "errors": []
+  }
+]

@@ -1,0 +1,3889 @@
+/*
+  FBG BAU — СТИЛИ
+
+  Комментарии специально оставлены по-русски.
+  Почти перед каждым селектором есть подпись, чтобы было понятно,
+  какой блок он меняет.
+
+  Важно: часть правил внизу файла специально переопределяет ранние.
+  Я не стал агрессивно объединять их, чтобы не сломать уже рабочую v7.2.
+*/
+
+/* Главные цвета и переменные сайта. Общую палитру удобнее менять здесь. */
+:root {
+  --bg:#090b0c;
+  --bg2:#101316;
+  --bg3:#15191b;
+  --text:#f3f4f4;
+  --muted:#9ca3a6;
+  --line:#2b3033;
+  --yellow:#e4b22f;
+  --max:1600px
+}
+/* Базовое правило размеров для всех элементов. */
+* {
+  box-sizing:border-box
+}
+/* Настройки самой страницы и плавного скролла. */
+html {
+  scroll-behavior:smooth;
+  background:var(--bg)
+}
+/* Основной фон, шрифт и запрет горизонтальной прокрутки. */
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden
+}
+a {
+  color:inherit;
+  text-decoration:none
+}
+::selection {
+  background:var(--yellow);
+  color:#08090a
+}
+/* Фиксированная верхняя панель. */
+.topbar {
+  height:82px;
+  position:fixed;
+  z-index:50;
+  top:0;
+  left:0;
+  right:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:env(safe-area-inset-top);
+  padding-left:max(20px,calc(env(safe-area-inset-left) + 20px));
+  padding-right:max(20px,calc(env(safe-area-inset-right) + 20px));
+  border-bottom:1px solid rgba(255,255,255,.09);
+  background:rgba(7,9,10,.78);
+  backdrop-filter:blur(18px)
+}
+/* Логотип и название FBG в шапке. */
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900
+}
+.brand-icon {
+  display:block;
+  width:28px;
+  height:28px;
+  flex:0 0 28px;
+  object-fit:contain
+}
+.brand-word {
+  font-size:24px;
+  letter-spacing:-.045em
+}
+.brand-mark {
+  width:30px;
+  height:12px;
+  background:var(--yellow);
+  transform:skewX(-34deg)
+}
+.brand small {
+  font-size:8px;
+  letter-spacing:.2em;
+  color:#8e9598;
+  margin-left:-2px;
+  align-self:flex-end;
+  margin-bottom:5px
+}
+/* Главное меню на большом экране. */
+.nav {
+  display:flex;
+  gap:29px
+}
+.nav a {
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  color:#c7cbcd;
+  transition:.2s
+}
+.nav a:hover {
+  color:var(--yellow)
+}
+/* Кнопка MENU на телефоне и планшете. */
+.menu-btn {
+  display:none;
+  background:none;
+  border:0;
+  color:#fff;
+  font:600 10px Inter;
+  letter-spacing:.18em
+}
+/* Длина главной scroll-анимации. */
+.build-scroll {
+  height:470vh;
+  min-height:2600px
+}
+/* Закреплённый экран, внутри которого работает кран/лестница. */
+.sticky-stage {
+  height:100vh;
+  position:sticky;
+  top:0;
+  overflow:hidden;
+  background:#0b0d0f
+}
+/* Фоновая фотография стройки. */
+.hero-photo {
+  position:absolute;
+  inset:0;
+  background:url('https://www.dbz.de/imgs/1/8/7/0/3/1/6/Vulcano_-_Zurich_Altstetten__ZH__03_Kopie-5977f22ddc633e7f.jpeg') center/cover no-repeat;
+  filter:grayscale(1) contrast(1.18);
+  opacity:.25;
+  transform:scale(1.06)
+}
+/* Запасной фон, если фото не загрузилось. */
+.hero-fallback {
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 70% 35%,#283037 0,transparent 27%),linear-gradient(#141a1e,#0b0d0f 63%)
+}
+.hero-fallback i {
+  position:absolute;
+  bottom:0;
+  background:#13181b;
+  border-top:1px solid #343a3d
+}
+.hero-fallback i:nth-child(1) {
+  left:53%;
+  width:11%;
+  height:47%
+}
+.hero-fallback i:nth-child(2) {
+  left:64%;
+  width:8%;
+  height:57%
+}
+.hero-fallback i:nth-child(3) {
+  left:73%;
+  width:12%;
+  height:39%
+}
+.hero-fallback i:nth-child(4) {
+  left:85%;
+  width:8%;
+  height:51%
+}
+.hero-fallback i:nth-child(5) {
+  left:93%;
+  width:11%;
+  height:44%
+}
+/* Фоновая фотография стройки. */
+.hero-photo {
+  z-index:1
+}
+/* Запасной фон, если фото не загрузилось. */
+.hero-fallback {
+  z-index:0
+}
+/* Тёмная маска поверх фона. */
+.hero-vignette {
+  position:absolute;
+  z-index:2;
+  inset:0;
+  background:linear-gradient(90deg,rgba(7,9,10,.98) 0%,rgba(7,9,10,.87) 34%,rgba(7,9,10,.2) 66%,rgba(7,9,10,.65) 100%),linear-gradient(0deg,#090b0c 0%,transparent 35%,rgba(0,0,0,.35) 100%)
+}
+/* Текстура шума поверх главной сцены. */
+.grain {
+  position:absolute;
+  z-index:4;
+  inset:0;
+  pointer-events:none;
+  opacity:.09;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")
+}
+/* Левый текст главной сцены. */
+.hero-copy {
+  position:absolute;
+  z-index:12;
+  left:5vw;
+  top:20vh;
+  max-width:min(690px,44vw)
+}
+.hero-brandline {
+  display:flex;
+  align-items:baseline;
+  gap:13px;
+  margin-bottom:27px
+}
+.hero-brandline span {
+  font-size:clamp(52px,6vw,104px);
+  line-height:.8;
+  font-weight:900;
+  letter-spacing:-.07em
+}
+.hero-brandline b {
+  font-size:12px;
+  letter-spacing:.18em;
+  color:var(--yellow);
+  margin-top:14px
+}
+.eyebrow {
+  font-size:10px;
+  letter-spacing:.24em;
+  color:#b3b8ba;
+  font-weight:700
+}
+.hero-copy h1 {
+  font-size:clamp(58px,7.6vw,128px);
+  line-height:.83;
+  letter-spacing:-.07em;
+  margin:24px 0 30px;
+  font-weight:900
+}
+.hero-copy h1 span {
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.57)
+}
+.lead {
+  max-width:520px;
+  color:#c7cbcd;
+  line-height:1.65;
+  font-size:15px
+}
+.story-copy {
+  transition:opacity .22s ease,transform .22s ease,filter .22s ease;
+  will-change:opacity,transform
+}
+.story-copy.is-switching {
+  opacity:0;
+  transform:translateY(18px);
+  filter:blur(4px)
+}
+.hero-fact {
+  margin-top:22px;
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:0 11px;
+  border-left:3px solid var(--yellow);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.16em;
+  color:#e4e7e8;
+  text-transform:uppercase;
+  background:linear-gradient(90deg,rgba(224,173,48,.10),transparent)
+}
+.scroll-hint {
+  margin-top:48px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  font-size:9px;
+  letter-spacing:.2em;
+  color:#c9cdce
+}
+.scroll-hint span {
+  width:9px;
+  height:26px;
+  border:1px solid #aeb2b4;
+  border-radius:10px;
+  position:relative
+}
+.scroll-hint span:after {
+  content:"";
+  position:absolute;
+  width:2px;
+  height:5px;
+  background:white;
+  border-radius:3px;
+  left:3px;
+  top:5px;
+  animation:scrollDot 1.6s infinite
+}
+/* Ключевые кадры небольшой CSS-анимации. */
+@keyframes scrollDot {
+  0% {
+    transform:translateY(0);
+    opacity:0
+  }
+  30% {
+    opacity:1
+  }
+  80% {
+    transform:translateY(10px);
+    opacity:0
+  }
+  100% {
+    opacity:0
+  }
+}
+/* SVG с краном для desktop. */
+.construction {
+  position:absolute;
+  z-index:6;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none
+}
+/* Рабочий на desktop. */
+.worker {
+  position:absolute;
+  z-index:9;
+  bottom:-2vh;
+  left:46vw;
+  width:min(23vw,330px);
+  filter:drop-shadow(0 22px 30px rgba(0,0,0,.55));
+  transform-origin:50% 100%
+}
+.worker svg {
+  display:block;
+  width:100%;
+  height:auto
+}
+/* Номер шага и прогресс внизу. */
+.build-ui {
+  position:absolute;
+  z-index:15;
+  right:4.4vw;
+  bottom:max(28px,calc(env(safe-area-inset-bottom) + 18px));
+  width:min(400px,35vw)
+}
+.step-label {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:12px
+}
+.step-label span {
+  font-size:36px;
+  font-weight:800;
+  color:var(--yellow)
+}
+.step-label b {
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#d8dbdc
+}
+.progress-track {
+  height:2px;
+  background:rgba(255,255,255,.18)
+}
+.progress-track i {
+  display:block;
+  width:0;
+  height:100%;
+  background:var(--yellow)
+}
+.stage-note {
+  position:absolute;
+  right:4.4vw;
+  top:152px;
+  z-index:12;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:9px;
+  color:#8f9598;
+  padding:8px 10px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(7,9,10,.32);
+  backdrop-filter:blur(4px);
+  border-radius:999px
+}
+.section-pad {
+  padding:13vh 5vw
+}
+.section-dark {
+  background:#0c0f11
+}
+/* Блок с цифрами о компании. */
+.numbers {
+  min-height:78vh;
+  padding:12vh 5vw;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--line)
+}
+.numbers>div {
+  background:var(--bg2);
+  padding:52px 36px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end
+}
+.numbers strong {
+  font-size:clamp(50px,6vw,96px);
+  letter-spacing:-.06em
+}
+.numbers span {
+  font-size:11px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:#aeb3b5
+}
+.numbers-copy p {
+  color:var(--yellow);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.2em
+}
+.numbers-copy h2 {
+  font-size:clamp(28px,3vw,52px);
+  line-height:1.02;
+  margin:16px 0 0;
+  letter-spacing:-.04em
+}
+.section-head {
+  display:grid;
+  grid-template-columns:1fr .62fr;
+  gap:8vw;
+  align-items:end;
+  margin-bottom:60px
+}
+.section-head h2,.history-title h2 {
+  font-size:clamp(44px,6.2vw,96px);
+  letter-spacing:-.06em;
+  line-height:.91;
+  margin:14px 0 0
+}
+.section-intro {
+  color:#aab0b2;
+  max-width:500px;
+  line-height:1.7
+}
+/* Секция услуг. */
+.services {
+  background:#0a0c0d
+}
+.service-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line)
+}
+.service-grid article {
+  min-height:300px;
+  padding:34px;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  flex-direction:column
+}
+.service-grid article>span {
+  color:var(--yellow);
+  font-weight:800;
+  font-size:13px
+}
+.service-grid h3 {
+  font-size:27px;
+  letter-spacing:-.04em;
+  margin:auto 0 15px
+}
+.service-grid p {
+  color:#9fa6a9;
+  line-height:1.6;
+  font-size:13px;
+  margin:0;
+  max-width:390px
+}
+.service-grid b {
+  color:#e6e8e8
+}
+.service-accent {
+  background:linear-gradient(145deg,#201b10,#111417)
+}
+/* Секция текущих строек. */
+.current {
+  background:#111417
+}
+.current-list {
+  border-top:1px solid #343a3d
+}
+.current-list article {
+  display:grid;
+  grid-template-columns:1fr 230px 220px;
+  gap:32px;
+  align-items:center;
+  padding:30px 0;
+  border-bottom:1px solid #343a3d
+}
+.current-list span {
+  font-size:9px;
+  color:var(--yellow);
+  letter-spacing:.17em
+}
+.current-list h3 {
+  font-size:clamp(24px,2.3vw,38px);
+  margin:7px 0 5px;
+  letter-spacing:-.035em
+}
+.current-list p {
+  margin:0;
+  color:#8f979a;
+  font-size:12px
+}
+.current-list strong {
+  text-align:right;
+  font-size:22px;
+  letter-spacing:-.03em
+}
+.current-list em {
+  font-style:normal;
+  color:#9da4a7;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.1em
+}
+/* Секция референсов. */
+.projects {
+  background:#090b0c
+}
+.project {
+  position:relative;
+  min-height:68vh;
+  overflow:hidden;
+  background:linear-gradient(135deg,#15191b,#0b0d0e);
+  border:1px solid #262c2f
+}
+.project-featured {
+  min-height:88vh
+}
+.project-bg {
+  position:absolute;
+  inset:0;
+  background-image:var(--project-image),linear-gradient(135deg,#2b3236,#0c0e10);
+  background-size:cover;
+  background-position:center;
+  filter:grayscale(.7) saturate(.5);
+  transform:scale(1.02);
+  transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s
+}
+.project:hover .project-bg {
+  transform:scale(1.06);
+  filter:grayscale(.15) saturate(.85)
+}
+.project-shade {
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(8,10,11,.92),rgba(8,10,11,.18) 72%),linear-gradient(0deg,rgba(8,10,11,.82),transparent 55%)
+}
+.project-index {
+  position:absolute;
+  top:28px;
+  right:32px;
+  font-size:11px;
+  letter-spacing:.14em;
+  color:#c3c6c8
+}
+.project-copy {
+  position:absolute;
+  z-index:3;
+  left:38px;
+  bottom:38px
+}
+.project-copy p {
+  font-size:9px;
+  letter-spacing:.2em;
+  color:#c4c8ca
+}
+.project-copy h3 {
+  font-size:clamp(48px,7vw,118px);
+  letter-spacing:-.07em;
+  margin:9px 0 15px;
+  line-height:.8
+}
+.project-copy address {
+  font-style:normal;
+  color:#d0d3d4;
+  line-height:1.55;
+  font-size:13px
+}
+.project-copy a {
+  display:inline-block;
+  margin-top:20px;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  border-bottom:1px solid #7f8587;
+  padding-bottom:5px
+}
+.project-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  margin-top:1px
+}
+.project-grid .project {
+  min-height:72vh
+}
+.project-grid .project h3 {
+  font-size:clamp(44px,5.3vw,84px)
+}
+.rights-note {
+  font-size:9px;
+  line-height:1.5;
+  color:#697074;
+  max-width:900px;
+  margin:22px 0 0
+}
+/* История компании. */
+.history {
+  background:#e7e4dc;
+  color:#101214
+}
+.history .eyebrow {
+  color:#666b6d
+}
+.history-title {
+  max-width:930px
+}
+.timeline {
+  margin-top:90px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid #a8a9a5
+}
+.timeline article {
+  padding:27px 25px 20px 0;
+  border-right:1px solid #c0c0bb
+}
+.timeline b {
+  font-size:11px;
+  letter-spacing:.13em;
+  color:#8b6b16
+}
+.timeline h3 {
+  font-size:25px;
+  letter-spacing:-.04em;
+  margin:85px 0 14px
+}
+.timeline p {
+  font-size:12px;
+  line-height:1.65;
+  color:#555b5d;
+  max-width:260px
+}
+/* Секция команды. */
+.team {
+  background:#0b0d0f
+}
+.leadership {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--line)
+}
+.leadership article {
+  background:#121619;
+  min-height:260px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between
+}
+.leadership article>span {
+  width:55px;
+  height:55px;
+  border:1px solid #3d4447;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--yellow);
+  font-weight:800
+}
+.leadership h3 {
+  margin:0 0 8px;
+  font-size:24px
+}
+.leadership p {
+  margin:0;
+  color:#929a9d;
+  font-size:12px
+}
+.loyalty {
+  margin-top:70px;
+  border-top:1px solid var(--line);
+  padding-top:30px
+}
+.loyalty>p {
+  font-size:9px;
+  letter-spacing:.18em;
+  color:#7d8588;
+  margin:28px 0 15px
+}
+.loyalty>div {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px
+}
+.loyalty span {
+  border:1px solid #343a3d;
+  padding:10px 14px;
+  font-size:11px
+}
+/* Секция вакансий. */
+.careers {
+  min-height:92vh;
+  background:radial-gradient(circle at 80% 42%,#302713 0,#121517 36%,#090b0c 74%);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8vw;
+  align-items:center
+}
+.career-copy h2 {
+  font-size:clamp(62px,8vw,130px);
+  line-height:.85;
+  letter-spacing:-.07em;
+  margin:16px 0 35px
+}
+.career-copy h2 span {
+  color:var(--yellow)
+}
+.career-copy>p:not(.eyebrow) {
+  max-width:520px;
+  color:#aab0b2;
+  line-height:1.7
+}
+.cta {
+  margin-top:25px;
+  display:inline-flex;
+  align-items:center;
+  gap:28px;
+  border:1px solid #474d50;
+  padding:17px 21px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:10px
+}
+.cta b {
+  color:var(--yellow);
+  font-size:18px
+}
+.jobs {
+  border-top:1px solid #404649
+}
+.jobs article {
+  position:relative;
+  padding:28px 55px 28px 0;
+  border-bottom:1px solid #404649
+}
+.jobs small {
+  color:#8f979a;
+  font-size:8px;
+  letter-spacing:.18em
+}
+.jobs h3 {
+  font-size:29px;
+  margin:9px 0 0
+}
+.jobs article>span {
+  position:absolute;
+  right:0;
+  top:50%;
+  font-size:28px;
+  color:var(--yellow)
+}
+.job-alt {
+  opacity:.75
+}
+/* Контактный блок. */
+.contact {
+  background:#0d1012;
+  min-height:82vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center
+}
+.contact>h2 {
+  font-size:clamp(58px,8vw,125px);
+  line-height:.86;
+  letter-spacing:-.07em;
+  margin:18px 0 75px
+}
+.contact>h2 span {
+  color:transparent;
+  -webkit-text-stroke:1px #7b8386
+}
+.contact-grid {
+  display:grid;
+  grid-template-columns:1.2fr 1fr 1.2fr 1fr;
+  border-top:1px solid #33393c
+}
+.contact-grid>div {
+  padding:26px 30px 0 0;
+  min-height:120px;
+  border-right:1px solid #33393c
+}
+.contact-grid small {
+  font-size:8px;
+  letter-spacing:.18em;
+  color:#747c7f
+}
+.contact-grid p,.contact-grid a {
+  font-size:14px;
+  line-height:1.6
+}
+.contact-grid a:hover {
+  color:var(--yellow)
+}
+/* Подвал сайта. */
+footer {
+  padding:48px 5vw 62px;
+  border-top:1px solid #2a2f31;
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr auto;
+  gap:40px;
+  align-items:end;
+  color:#aeb3b5;
+  font-size:10px;
+  line-height:1.6;
+  letter-spacing:.05em
+}
+.footer-brand {
+  font-size:30px;
+  font-weight:900;
+  color:white;
+  letter-spacing:-.04em
+}
+.footer-brand>span {
+  display:inline-block;
+  width:26px;
+  height:10px;
+  background:var(--yellow);
+  transform:skewX(-34deg);
+  margin-left:11px
+}
+.footer-brand small {
+  font-size:8px;
+  margin-left:8px;
+  color:#8c9497;
+  letter-spacing:.17em
+}
+.reveal {
+  opacity:0;
+  transform:translateY(30px);
+  transition:.8s cubic-bezier(.2,.7,.2,1)
+}
+/* Элемент после плавного появления. */
+.reveal.is-visible {
+  opacity:1;
+  transform:none
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:1100px) {
+  /* Главное меню на большом экране. */
+  .nav {
+    gap:15px
+  }
+  .nav a {
+    font-size:8px
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:47vw;
+    width:23vw
+  }
+  .service-grid {
+    grid-template-columns:1fr 1fr
+  }
+  .leadership {
+    grid-template-columns:1fr 1fr
+  }
+  .current-list article {
+    grid-template-columns:1fr 180px
+  }
+  .current-list em {
+    grid-column:1/-1
+  }
+  .timeline {
+    grid-template-columns:1fr 1fr
+  }
+  .timeline article {
+    min-height:300px
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  /* Фиксированная верхняя панель. */
+  .topbar {
+    height:68px;
+    padding:0 20px
+  }
+  /* Главное меню на большом экране. */
+  .nav {
+    display:none
+  }
+  /* Кнопка MENU на телефоне и планшете. */
+  .menu-btn {
+    display:block
+  }
+  .brand-word {
+    font-size:20px
+  }
+  .brand small {
+    display:none
+  }
+  /* Длина главной scroll-анимации. */
+  .build-scroll {
+    height:410vh
+  }
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    left:22px;
+    top:14vh;
+    max-width:82vw
+  }
+  .brand-icon {
+    width:22px;
+    height:22px;
+    flex-basis:22px
+  }
+  .hero-brandline {
+    margin-bottom:20px
+  }
+  .hero-brandline span {
+    font-size:12vw
+  }
+  .hero-brandline b {
+    font-size:8px
+  }
+  .hero-copy h1 {
+    font-size:14.4vw;
+    line-height:.88
+  }
+  .lead {
+    font-size:12px;
+    max-width:70vw
+  }
+  .scroll-hint {
+    margin-top:28px
+  }
+  /* SVG с краном для desktop. */
+  .construction {
+    width:158%;
+    left:-53%
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:53%;
+    bottom:-1vh;
+    width:38vw;
+    opacity:.95
+  }
+  /* Номер шага и прогресс внизу. */
+  .build-ui {
+    left:22px;
+    right:auto;
+    bottom:24px;
+    width:calc(100% - 44px)
+  }
+  .stage-note {
+    display:block
+  }
+  /* Блок с цифрами о компании. */
+  .numbers {
+    grid-template-columns:1fr 1fr;
+    padding:1px;
+    min-height:auto
+  }
+  .numbers>div {
+    min-height:245px;
+    padding:25px 20px
+  }
+  .section-pad {
+    padding:90px 20px
+  }
+  .section-head {
+    grid-template-columns:1fr;
+    gap:22px
+  }
+  .service-grid {
+    grid-template-columns:1fr
+  }
+  .service-grid article {
+    min-height:250px
+  }
+  .current-list article {
+    grid-template-columns:1fr;
+    padding:25px 0
+  }
+  .current-list strong {
+    text-align:left
+  }
+  .project-featured {
+    min-height:70vh
+  }
+  .project-grid {
+    grid-template-columns:1fr
+  }
+  .project-grid .project {
+    min-height:60vh
+  }
+  .project-copy {
+    left:23px;
+    bottom:25px
+  }
+  .project-copy h3 {
+    font-size:14vw
+  }
+  .timeline {
+    grid-template-columns:1fr
+  }
+  .timeline article {
+    min-height:0;
+    padding:26px 0;
+    border-right:0;
+    border-bottom:1px solid #c0c0bb
+  }
+  .timeline h3 {
+    margin:40px 0 12px
+  }
+  .leadership {
+    grid-template-columns:1fr
+  }
+  /* Секция вакансий. */
+  .careers {
+    grid-template-columns:1fr;
+    gap:70px
+  }
+  .career-copy h2 {
+    font-size:16vw
+  }
+  .contact-grid {
+    grid-template-columns:1fr 1fr
+  }
+  .contact-grid>div {
+    border-bottom:1px solid #33393c
+  }
+  .contact>h2 {
+    font-size:14vw
+  }
+  /* Подвал сайта. */
+  footer {
+    grid-template-columns:1fr 1fr;
+    padding:40px 20px
+  }
+  .footer-brand {
+    grid-column:1/-1
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(prefers-reduced-motion:reduce) {
+  /* Настройки самой страницы и плавного скролла. */
+  html {
+    scroll-behavior:auto
+  }
+  .project-bg,.scroll-hint span:after,.reveal {
+    transition:none;
+    animation:none
+  }
+}
+/* Чистка графики крана: без лишнего blur, линии остаются чёткими. */
+.construction .crane {
+  filter:none
+}
+.construction .mast,.construction .jib {
+  filter:none
+}
+.construction #cable,.construction #slingLeft,.construction #slingRight {
+  vector-effect:non-scaling-stroke
+}
+/* Рабочий на desktop. */
+.worker {
+  width:min(21vw,305px)
+}
+.worker .helmet-logo {
+  filter:none
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:1100px) {
+  /* Рабочий на desktop. */
+  .worker {
+    width:21vw
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  /* Рабочий на desktop. */
+  .worker {
+    width:34vw
+  }
+}
+/* Мелкие поправки логотипов и деталей рабочего. */
+.crane-brand {
+  transform-box:fill-box;
+  transform-origin:center
+}
+.worker .helmet-logo {
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.22))
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:1280px) {
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    max-width:min(680px,48vw)
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:47vw
+  }
+  /* Номер шага и прогресс внизу. */
+  .build-ui {
+    width:min(390px,38vw)
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:980px) {
+  /* Фиксированная верхняя панель. */
+  .topbar {
+    height:74px
+  }
+  /* Главное меню на большом экране. */
+  .nav {
+    display:none
+  }
+  /* Кнопка MENU на телефоне и планшете. */
+  .menu-btn {
+    display:block
+  }
+  /* Длина главной scroll-анимации. */
+  .build-scroll {
+    height:430vh;
+    min-height:2200px
+  }
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    left:26px;
+    top:15.5vh;
+    max-width:56vw
+  }
+  .hero-brandline span {
+    font-size:clamp(42px,8vw,78px)
+  }
+  .hero-copy h1 {
+    font-size:clamp(50px,9vw,92px)
+  }
+  .lead {
+    max-width:48vw;
+    font-size:14px
+  }
+  /* SVG с краном для desktop. */
+  .construction {
+    width:128%;
+    left:-18%
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:55vw;
+    width:min(24vw,230px);
+    bottom:-1vh
+  }
+  .stage-note {
+    top:100px;
+    right:24px
+  }
+  /* Блок с цифрами о компании. */
+  .numbers {
+    grid-template-columns:1fr 1fr
+  }
+  .service-grid,.leadership,.timeline {
+    grid-template-columns:1fr 1fr
+  }
+  .project-grid {
+    grid-template-columns:1fr
+  }
+  .contact-grid {
+    grid-template-columns:1fr 1fr
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  /* Фиксированная верхняя панель. */
+  .topbar {
+    height:68px;
+    padding-left:max(16px,calc(env(safe-area-inset-left) + 16px));
+    padding-right:max(16px,calc(env(safe-area-inset-right) + 16px))
+  }
+  /* Главное меню на большом экране. */
+  .nav {
+    display:none
+  }
+  /* Кнопка MENU на телефоне и планшете. */
+  .menu-btn {
+    display:block
+  }
+  /* Логотип и название FBG в шапке. */
+  .brand {
+    gap:8px
+  }
+  .brand-word {
+    font-size:20px
+  }
+  .brand small {
+    display:none
+  }
+  /* Длина главной scroll-анимации. */
+  .build-scroll {
+    height:390vh;
+    min-height:1900px
+  }
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    left:20px;
+    top:12.5vh;
+    max-width:88vw
+  }
+  .hero-brandline {
+    margin-bottom:16px
+  }
+  .hero-brandline span {
+    font-size:13vw
+  }
+  .hero-brandline b {
+    font-size:8px;
+    margin-top:10px
+  }
+  .hero-copy h1 {
+    font-size:14vw;
+    line-height:.88;
+    margin:18px 0 20px
+  }
+  .lead {
+    font-size:12px;
+    max-width:74vw;
+    line-height:1.55
+  }
+  .hero-fact {
+    font-size:8px;
+    letter-spacing:.14em;
+    padding:0 10px
+  }
+  .scroll-hint {
+    margin-top:24px
+  }
+  /* SVG с краном для desktop. */
+  .construction {
+    width:178%;
+    left:-68%;
+    top:2%
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:54vw;
+    bottom:-0.5vh;
+    width:34vw;
+    max-width:170px;
+    opacity:.98
+  }
+  /* Номер шага и прогресс внизу. */
+  .build-ui {
+    left:20px;
+    right:20px;
+    bottom:max(18px,calc(env(safe-area-inset-bottom) + 10px));
+    width:auto
+  }
+  .step-label span {
+    font-size:28px
+  }
+  .step-label b {
+    font-size:9px
+  }
+  .stage-note {
+    right:20px;
+    top:78px;
+    font-size:8px;
+    padding:6px 9px
+  }
+  /* Блок с цифрами о компании. */
+  .numbers {
+    grid-template-columns:1fr 1fr;
+    padding:1px;
+    min-height:auto
+  }
+  .numbers>div {
+    min-height:220px;
+    padding:24px 18px
+  }
+  .section-pad {
+    padding:84px 20px
+  }
+  .section-head {
+    grid-template-columns:1fr;
+    gap:22px
+  }
+  .service-grid {
+    grid-template-columns:1fr
+  }
+  .service-grid article {
+    min-height:240px
+  }
+  .current-list article {
+    grid-template-columns:1fr;
+    padding:25px 0
+  }
+  .current-list strong {
+    text-align:left
+  }
+  .timeline {
+    grid-template-columns:1fr
+  }
+  .timeline article {
+    min-height:0;
+    padding:26px 0;
+    border-right:0;
+    border-bottom:1px solid #c0c0bb
+  }
+  .leadership {
+    grid-template-columns:1fr
+  }
+  /* Секция вакансий. */
+  .careers {
+    grid-template-columns:1fr;
+    gap:56px
+  }
+  .contact-grid {
+    grid-template-columns:1fr 1fr
+  }
+  /* Подвал сайта. */
+  footer {
+    grid-template-columns:1fr 1fr;
+    padding:38px 20px calc(38px + env(safe-area-inset-bottom))
+  }
+  .footer-brand {
+    grid-column:1/-1
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:480px) {
+  /* Фиксированная верхняя панель. */
+  .topbar {
+    height:64px
+  }
+  .brand-word {
+    font-size:18px
+  }
+  .brand-icon {
+    width:20px;
+    height:20px;
+    flex-basis:20px
+  }
+  /* Кнопка MENU на телефоне и планшете. */
+  .menu-btn {
+    font-size:9px
+  }
+  /* Длина главной scroll-анимации. */
+  .build-scroll {
+    height:370vh;
+    min-height:1750px
+  }
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    left:16px;
+    top:11.5vh;
+    max-width:90vw
+  }
+  .hero-brandline span {
+    font-size:15vw
+  }
+  .hero-copy h1 {
+    font-size:15vw
+  }
+  .lead {
+    max-width:76vw;
+    font-size:11px
+  }
+  .hero-fact {
+    margin-top:16px
+  }
+  /* SVG с краном для desktop. */
+  .construction {
+    width:205%;
+    left:-90%;
+    top:5%
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:56vw;
+    width:36vw;
+    max-width:150px
+  }
+  .stage-note {
+    top:72px;
+    right:16px;
+    font-size:7px
+  }
+  /* Номер шага и прогресс внизу. */
+  .build-ui {
+    left:16px;
+    right:16px
+  }
+  .contact-grid {
+    grid-template-columns:1fr
+  }
+}
+/* Дополнительная подгонка композиции под узкие экраны. */
+@media (max-width: 900px) {
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    max-width:min(58vw,520px)
+  }
+  /* SVG с краном для desktop. */
+  .construction {
+    width:118%;
+    left:-10%;
+    top:1%
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:58vw;
+    width:min(22vw,210px)
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media (max-width: 760px) {
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    left:18px;
+    top:12vh;
+    max-width:60vw
+  }
+  .hero-copy h1 {
+    font-size:13vw
+  }
+  .lead {
+    max-width:56vw
+  }
+  .hero-brandline span {
+    font-size:12vw
+  }
+  /* SVG с краном для desktop. */
+  .construction {
+    width:150%;
+    left:-32%;
+    top:0
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:61vw;
+    bottom:-0.5vh;
+    width:31vw;
+    max-width:160px
+  }
+  /* Номер шага и прогресс внизу. */
+  .build-ui {
+    left:18px;
+    right:18px;
+    bottom:max(18px,calc(env(safe-area-inset-bottom) + 10px))
+  }
+  .stage-note {
+    top:76px;
+    right:18px;
+    max-width:42vw;
+    text-align:right
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media (max-width: 480px) {
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    left:16px;
+    top:11.5vh;
+    max-width:62vw
+  }
+  .hero-copy h1 {
+    font-size:14vw
+  }
+  .lead {
+    max-width:58vw;
+    font-size:11px
+  }
+  /* SVG с краном для desktop. */
+  .construction {
+    width:165%;
+    left:-42%;
+    top:1.5%
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:63vw;
+    width:30vw;
+    max-width:142px
+  }
+  .stage-note {
+    top:70px;
+    right:16px;
+    max-width:45vw
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media (max-width: 390px) {
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    max-width:63vw
+  }
+  /* SVG с краном для desktop. */
+  .construction {
+    width:172%;
+    left:-48%;
+    top:2%
+  }
+  /* Рабочий на desktop. */
+  .worker {
+    left:64vw;
+    width:31vw;
+    max-width:136px
+  }
+}
+/* Стабильность главной сцены при изменении размера окна на ноутбуке. */
+@media (min-width:761px) {
+  /* Длина главной scroll-анимации. */
+  .build-scroll {
+    height:max(2600px,470vh);
+    min-height:2600px
+  }
+}
+.stage-note {
+  top:auto;
+  right:4.4vw;
+  bottom:106px;
+  max-width:260px;
+  text-align:right
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:980px) {
+  .stage-note {
+    top:auto;
+    right:24px;
+    bottom:98px
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  .stage-note {
+    top:auto;
+    right:18px;
+    bottom:max(76px,calc(env(safe-area-inset-bottom) + 68px));
+    max-width:48vw
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:480px) {
+  .stage-note {
+    top:auto;
+    right:16px;
+    bottom:max(72px,calc(env(safe-area-inset-bottom) + 66px));
+    max-width:50vw
+  }
+}
+/* Фиксированная длина scroll-сцены: нужна, чтобы ресайз не ломал анимацию. */
+.build-scroll {
+  height:4200px !important;
+  min-height:4200px !important
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  /* Длина главной scroll-анимации. */
+  .build-scroll {
+    height:4000px !important;
+    min-height:4000px !important
+  }
+}
+/* Мобильная версия: вместо крана показываем лестницу с рабочим. */
+.mobile-stairs {
+  display:none
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  .construction,.worker {
+    display:none!important
+  }
+  /* Вся мобильная сцена с лестницей. */
+  .mobile-stairs {
+    display:block;
+    position:absolute;
+    z-index:7;
+    inset:0;
+    overflow:hidden;
+    background:     linear-gradient(90deg,rgba(7,9,10,.82) 0%,rgba(7,9,10,.5) 46%,rgba(7,9,10,.15) 72%,rgba(7,9,10,.55) 100%),     radial-gradient(circle at 78% 18%,rgba(228,178,47,.14),transparent 28%),     linear-gradient(135deg,#202529 0%,#121619 46%,#090b0c 100%)
+  }
+  .mobile-stairs:before {
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.26;
+    background-image:     repeating-linear-gradient(0deg,transparent 0 69px,rgba(255,255,255,.055) 70px 71px),     repeating-linear-gradient(90deg,transparent 0 119px,rgba(255,255,255,.035) 120px 121px)
+  }
+  .concrete-seam {
+    position:absolute;
+    width:1px;
+    top:0;
+    bottom:0;
+    background:rgba(255,255,255,.08)
+  }
+  .seam-a {
+    left:66%
+  }
+  .seam-b {
+    left:88%;
+    opacity:.5
+  }
+  .floor-line {
+    position:absolute;
+    left:46%;
+    right:0;
+    height:11px;
+    background:linear-gradient(90deg,#3a4043,#15191b);
+    border-top:1px solid rgba(255,255,255,.12);
+    box-shadow:0 12px 25px rgba(0,0,0,.35)
+  }
+  .floor-line span {
+    position:absolute;
+    right:10px;
+    top:-17px;
+    font-size:7px;
+    letter-spacing:.13em;
+    color:#737b7e
+  }
+  .floor-a {
+    top:24%
+  }
+  .floor-b {
+    top:48%
+  }
+  .floor-c {
+    top:72%
+  }
+  .ladder {
+    position:absolute;
+    right:9%;
+    top:78px;
+    bottom:104px;
+    width:78px;
+    border-left:7px solid #aeb4b6;
+    border-right:7px solid #8f9698;
+    transform:perspective(600px) rotateY(-7deg);
+    filter:drop-shadow(0 16px 18px rgba(0,0,0,.45))
+  }
+  .ladder i {
+    display:block;
+    height:calc(100% / 15);
+    border-bottom:5px solid #9fa6a8
+  }
+  .mobile-slab {
+    position:absolute;
+    left:39%;
+    right:-12%;
+    bottom:56px;
+    height:48px;
+    background:linear-gradient(#555b5e,#282d30);
+    transform:skewX(-18deg);
+    border-top:1px solid #878d8f;
+    box-shadow:0 -18px 40px rgba(0,0,0,.25)
+  }
+  /* Рабочий, который спускается по лестнице. */
+  .mobile-worker {
+    position:absolute;
+    z-index:9;
+    width:112px;
+    left:calc(89% - 84px);
+    top:102px;
+    transform-origin:50% 85%;
+    will-change:transform;
+    filter:drop-shadow(0 16px 18px rgba(0,0,0,.5))
+  }
+  .mobile-worker svg {
+    display:block;
+    width:100%;
+    height:auto
+  }
+  .mobile-worker .mw-arm,.mobile-worker .mw-leg {
+    transform-box:fill-box;
+    transform-origin:center;
+    transition:transform .12s linear
+  }
+  .mobile-worker .mw-thumb {
+    transition:opacity .25s ease
+  }
+  .mobile-worker.is-finished .mw-arm-r {
+    opacity:0
+  }
+  .mobile-worker.is-finished .mw-thumb {
+    opacity:1
+  }
+  .mobile-worker.is-finished .mw-leg-l,.mobile-worker.is-finished .mw-leg-r {
+    transform:rotate(0deg)!important
+  }
+  /* Финальная надпись FERTIG на телефоне. */
+  .mobile-end {
+    position:absolute;
+    z-index:10;
+    right:18px;
+    bottom:122px;
+    width:46vw;
+    text-align:right;
+    opacity:0;
+    transform:translateY(12px);
+    transition:.3s ease
+  }
+  .mobile-end b {
+    display:block;
+    font-size:10vw;
+    letter-spacing:-.06em;
+    line-height:.85;
+    color:var(--yellow)
+  }
+  .mobile-end span {
+    display:block;
+    margin-top:8px;
+    font-size:9px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#d1d5d6
+  }
+  .mobile-end.is-visible {
+    opacity:1;
+    transform:none
+  }
+  /* Фоновая фотография стройки. */
+  .hero-photo {
+    opacity:.1
+  }
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    z-index:12;
+    max-width:61vw
+  }
+  .hero-brandline span {
+    font-size:13vw
+  }
+  .hero-copy h1 {
+    font-size:13.5vw
+  }
+  .lead {
+    max-width:60vw
+  }
+  .stage-note {
+    display:none
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:390px) {
+  .ladder {
+    right:7%;
+    width:70px
+  }
+  /* Рабочий, который спускается по лестнице. */
+  .mobile-worker {
+    width:104px;
+    left:calc(89% - 79px)
+  }
+  /* Левый текст главной сцены. */
+  .hero-copy {
+    max-width:63vw
+  }
+}
+/* Более понятная отрисовка DOKA на мобильной сцене. */
+#panel .doka-pack text {
+  letter-spacing:.04em
+}
+/* Пачка DOKA, которую переносит кран. */
+#panel .doka-pack {
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.18))
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  .mobile-doka-scene {
+    position:absolute;
+    right:19%;
+    top:96px;
+    width:158px;
+    height:258px;
+    pointer-events:none;
+    opacity:.99
+  }
+  /* Стойка DOKA 700. */
+  .mobile-prop700 {
+    position:absolute;
+    right:48px;
+    top:2px;
+    width:42px;
+    height:236px
+  }
+  .mobile-prop700 .prop-head {
+    position:absolute;
+    left:-2px;
+    top:0;
+    width:46px;
+    height:11px;
+    background:linear-gradient(180deg,#d8dde2,#b8c0c7);
+    border:1px solid rgba(60,68,78,.85);
+    border-radius:4px
+  }
+  .mobile-prop700 .prop-band {
+    position:absolute;
+    left:-1px;
+    width:44px;
+    height:8px;
+    background:linear-gradient(180deg,#7fb4e8,#4e86bd);
+    border-left:1px solid rgba(38,65,97,.8);
+    border-right:1px solid rgba(38,65,97,.8)
+  }
+  .mobile-prop700 .prop-band-top {
+    top:16px
+  }
+  .mobile-prop700 .prop-shaft {
+    position:absolute;
+    left:10px;
+    top:24px;
+    bottom:24px;
+    width:22px;
+    background:linear-gradient(180deg,#d7dde2,#aeb8c1 45%,#919aa2 100%);
+    border-left:1px solid rgba(255,255,255,.45);
+    border-right:1px solid rgba(70,78,86,.8);
+    border-radius:4px
+  }
+  .mobile-prop700 .prop-collar {
+    position:absolute;
+    left:5px;
+    top:102px;
+    width:32px;
+    height:24px;
+    border-radius:4px;
+    background:linear-gradient(180deg,#d9dee2,#aeb6bc);
+    border:1px solid rgba(61,69,75,.82);
+    box-shadow:0 0 0 2px rgba(255,255,255,.05) inset
+  }
+  .mobile-prop700 .prop-band-bottom {
+    bottom:15px
+  }
+  .mobile-prop700 .prop-foot {
+    position:absolute;
+    left:-4px;
+    bottom:0;
+    width:48px;
+    height:12px;
+    background:linear-gradient(180deg,#d0d6db,#adb6be);
+    border:1px solid rgba(60,68,78,.85);
+    border-radius:4px
+  }
+  .mobile-prop700 .prop-brand {
+    position:absolute;
+    left:-26px;
+    top:84px;
+    transform:rotate(-90deg);
+    transform-origin:center;
+    font-size:10px;
+    letter-spacing:.15em;
+    color:#132b55;
+    font-weight:900
+  }
+  .mobile-prop700 .prop-code {
+    position:absolute;
+    right:-5px;
+    top:92px;
+    font-style:normal;
+    font-size:16px;
+    letter-spacing:.06em;
+    color:#132b55;
+    font-weight:900
+  }
+  /* Балка DOKA 4.90 рядом со стойкой. */
+  .mobile-longerina {
+    position:absolute;
+    left:4px;
+    top:56px;
+    width:154px;
+    height:20px;
+    transform:rotate(-73deg);
+    transform-origin:left center;
+    background:linear-gradient(180deg,#f1be43,#d4971e);
+    border:1px solid rgba(71,52,13,.85);
+    border-radius:4px;
+    box-shadow:0 10px 18px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.26)
+  }
+  .mobile-longerina:before,.mobile-longerina:after {
+    content:"";
+    position:absolute;
+    left:3px;
+    right:3px;
+    height:2px;
+    background:rgba(34,30,21,.5)
+  }
+  .mobile-longerina:before {
+    top:4px
+  }
+  .mobile-longerina:after {
+    bottom:4px
+  }
+  .mobile-longerina span,.mobile-longerina small {
+    position:absolute;
+    top:3px;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.07em;
+    color:#132b55
+  }
+  .mobile-longerina span:nth-child(1) {
+    left:11px
+  }
+  .mobile-longerina span:nth-child(2) {
+    left:51px
+  }
+  .mobile-longerina span:nth-child(3) {
+    left:91px
+  }
+  .mobile-longerina small {
+    right:7px;
+    top:3px;
+    font-size:7px;
+    color:#1d2840
+  }
+  /* Финальная надпись FERTIG на телефоне. */
+  .mobile-end {
+    width:49vw
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:390px) {
+  .mobile-doka-scene {
+    right:17%;
+    top:95px;
+    transform:scale(.92);
+    transform-origin:top right
+  }
+}
+/* Дополнительная шлифовка DOKA и положения элементов. */
+#panel .doka-pack .beam {
+  opacity:.99
+}
+#panel .doka-pack .beam:nth-child(odd) {
+  transform:translateX(0)
+}
+#panel .doka-pack .beam text {
+  letter-spacing:.035em
+}
+/* Пачка DOKA, которую переносит кран. */
+#panel .doka-pack {
+  filter:drop-shadow(0 12px 18px rgba(0,0,0,.20))
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  .mobile-doka-scene {
+    right:16%;
+    top:92px;
+    width:188px;
+    height:286px
+  }
+  .mobile-doka-deck {
+    position:absolute;
+    left:6px;
+    right:10px;
+    bottom:30px;
+    height:16px;
+    background:linear-gradient(180deg,#5e6468,#34393c);
+    border-top:1px solid rgba(205,210,213,.35);
+    border-radius:3px;
+    box-shadow:0 12px 24px rgba(0,0,0,.24)
+  }
+  .mobile-doka-deck:before {
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    top:-4px;
+    height:4px;
+    background:rgba(255,255,255,.08)
+  }
+  /* Стойка DOKA 700. */
+  .mobile-prop700 {
+    right:54px;
+    top:2px;
+    width:48px;
+    height:252px
+  }
+  .mobile-prop700 .prop-head {
+    left:-2px;
+    width:52px;
+    height:12px;
+    border-radius:4px
+  }
+  .mobile-prop700 .prop-band {
+    left:-1px;
+    width:50px;
+    height:8px
+  }
+  .mobile-prop700 .prop-band-top {
+    top:18px
+  }
+  .mobile-prop700 .prop-shaft {
+    left:11px;
+    top:26px;
+    bottom:26px;
+    width:26px;
+    border-radius:5px
+  }
+  .mobile-prop700 .prop-collar {
+    left:6px;
+    top:108px;
+    width:36px;
+    height:26px
+  }
+  .mobile-prop700 .prop-band-bottom {
+    bottom:17px
+  }
+  .mobile-prop700 .prop-foot {
+    left:-4px;
+    bottom:18px;
+    width:56px;
+    height:12px
+  }
+  .mobile-prop700 .prop-brand {
+    left:-23px;
+    top:89px;
+    font-size:10px
+  }
+  .mobile-prop700 .prop-code {
+    right:-7px;
+    top:98px;
+    font-size:18px
+  }
+  .mobile-prop700:after {
+    content:"";
+    position:absolute;
+    left:15px;
+    bottom:8px;
+    width:22px;
+    height:10px;
+    background:rgba(0,0,0,.12);
+    filter:blur(6px)
+  }
+  /* Балка DOKA 4.90 рядом со стойкой. */
+  .mobile-longerina {
+    left:12px;
+    top:58px;
+    width:172px;
+    height:22px;
+    transform:rotate(-72deg);
+    box-shadow:0 12px 20px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.28)
+  }
+  .mobile-longerina:before,.mobile-longerina:after {
+    left:4px;
+    right:4px
+  }
+  .mobile-longerina span,.mobile-longerina small {
+    top:4px;
+    font-size:8.2px
+  }
+  .mobile-longerina span:nth-child(1) {
+    left:12px
+  }
+  .mobile-longerina span:nth-child(2) {
+    left:56px
+  }
+  .mobile-longerina span:nth-child(3) {
+    left:100px
+  }
+  .mobile-longerina small {
+    right:8px;
+    font-size:7.2px
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:390px) {
+  .mobile-doka-scene {
+    right:14%;
+    top:92px;
+    transform:scale(.92);
+    transform-origin:top right
+  }
+}
+/* Финальная надпись на десктопе и более плотная пачка DOKA. */
+.desktop-end {
+  position:absolute;
+  z-index:16;
+  right:4.4vw;
+  bottom:96px;
+  width:min(340px,28vw);
+  text-align:right;
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .28s ease,transform .28s ease;
+  pointer-events:none
+}
+.desktop-end b {
+  display:block;
+  font-size:clamp(54px,5vw,88px);
+  letter-spacing:-.06em;
+  line-height:.84;
+  color:var(--yellow)
+}
+.desktop-end span {
+  display:block;
+  margin-top:10px;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#d1d5d6
+}
+.desktop-end.is-visible {
+  opacity:1;
+  transform:none
+}
+#panel .doka-pack .beam {
+  opacity:.995
+}
+#panel .doka-pack .beam + .beam {
+  margin-top:0
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  /* Финальный блок FERTIG на desktop. */
+  .desktop-end {
+    display:none
+  }
+}
+/* Исправления финального состояния и DOKA. */
+.desktop-end {
+  right:4.4vw;
+  bottom:126px;
+  width:min(360px,30vw);
+  padding:16px 0 0 20px;
+  border-top:1px solid rgba(224,173,48,.45);
+  background:linear-gradient(90deg,rgba(7,9,10,0),rgba(7,9,10,.12) 30%,rgba(7,9,10,.0));
+  text-shadow:0 8px 20px rgba(0,0,0,.35)
+}
+.desktop-end b {
+  font-size:clamp(58px,5.5vw,96px)
+}
+.desktop-end span {
+  font-size:10px;
+  letter-spacing:.16em
+}
+#panel .doka-pack .beam {
+  opacity:1
+}
+/* Последняя точечная настройка FERTIG из рабочей версии v7.2. */
+.desktop-end {
+  position:absolute;
+  z-index:30;
+  right:6vw;
+  top:34vh;
+  bottom:auto;
+  width:min(440px,32vw);
+  text-align:right;
+  opacity:0;
+  transform:translateY(20px) scale(.985);
+  transition:opacity .32s ease,transform .32s ease;
+  pointer-events:none;
+  padding:0 0 14px 0;
+  border-bottom:1px solid rgba(224,173,48,.42);
+  background:linear-gradient(90deg,transparent,rgba(7,9,10,.18) 55%,rgba(7,9,10,.36));
+}
+.desktop-end small {
+  display:block;
+  margin-bottom:8px;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.21em;
+  color:#9ca3a6;
+  text-transform:uppercase
+}
+.desktop-end b {
+  display:block;
+  font-size:clamp(39px,4vw,75px);
+  font-weight:900;
+  letter-spacing:-.075em;
+  line-height:.8;
+  color:#d8a130;
+  text-shadow:0 10px 22px rgba(0,0,0,.34)
+}
+.desktop-end span {
+  display:block;
+  margin-top:12px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#d7dbdc
+}
+.desktop-end.is-visible {
+  opacity:1;
+  transform:none
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:980px) and (min-width:761px) {
+  /* Финальный блок FERTIG на desktop. */
+  .desktop-end {
+    right:4vw;
+    top:37vh;
+    width:40vw
+  }
+  .desktop-end b {
+    font-size:4.2vw
+  }
+}
+/* Адаптация под этот размер экрана. */
+@media(max-width:760px) {
+  /* Финальный блок FERTIG на desktop. */
+  .desktop-end {
+    display:none!important
+  }
+}
+/* Пачка DOKA, которую переносит кран. */
+#panel .doka-pack {
+  filter:drop-shadow(0 14px 20px rgba(0,0,0,.24))
+}
+/* Одна отдельная DOKA H20 внутри пачки. */
+#panel .doka-pack .h20 {
+  opacity:1
+}
+
+/* =========================================================
+   ДОПОЛНЕНИЯ ДЛЯ ПОЛНОЙ ВЕРСИИ САЙТА
+   Здесь лежат стили новых информационных разделов.
+   Основную анимацию крана и мобильной лестницы выше не трогаем.
+   ========================================================= */
+
+/* В верхнем меню стало больше пунктов, поэтому немного уменьшаем расстояние. */
+.nav { gap: 21px; }
+.nav a { white-space: nowrap; }
+
+/* Полный блок «О нас». */
+.about-detail { background:#0d1012; }
+.about-grid { display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.about-card { min-height:300px; padding:34px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); display:flex; flex-direction:column; }
+.about-card>span { color:var(--yellow); font-size:11px; font-weight:800; letter-spacing:.15em; }
+.about-card h3 { margin:auto 0 16px; font-size:clamp(26px,2.5vw,40px); letter-spacing:-.045em; }
+.about-card p { margin:0; max-width:620px; color:#a3aaad; font-size:13px; line-height:1.75; }
+
+/* Кнопка-запрос под услугами. */
+.service-cta-row { margin-top:34px; display:flex; justify-content:space-between; align-items:center; gap:30px; border-top:1px solid var(--line); padding-top:28px; }
+.service-cta-row p { margin:0; max-width:620px; color:#a8afb1; line-height:1.6; }
+
+/* Архив старых референсов. */
+.reference-archive { margin-top:90px; padding-top:32px; border-top:1px solid var(--line); }
+.reference-archive-grid { margin-top:22px; display:grid; grid-template-columns:repeat(5,1fr); border-left:1px solid var(--line); border-top:1px solid var(--line); }
+.reference-archive-grid article { min-height:150px; padding:22px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between; }
+.reference-archive-grid small { color:var(--yellow); font-size:8px; letter-spacing:.16em; }
+.reference-archive-grid h3 { margin:0; font-size:18px; line-height:1.12; letter-spacing:-.03em; }
+
+/* Карточки руководителей с местом под фотографии. */
+.leadership .team-card { padding:0; min-height:460px; overflow:hidden; }
+.team-photo { position:relative; height:260px; background:linear-gradient(135deg,#1d2225,#0c0f11); overflow:hidden; border-bottom:1px solid var(--line); }
+.team-initials { position:absolute; inset:0; display:grid; place-items:center; color:rgba(224,173,48,.65); font-size:52px; font-weight:900; letter-spacing:-.06em; }
+.team-photo-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+/* Пустой src скрываем: пока фото нет, остаются инициалы. */
+.team-photo-img[src=""] { display:none; }
+.team-person { padding:24px 26px 26px; display:flex; flex-direction:column; min-height:195px; }
+.team-person h3 { margin:0 0 8px; }
+.team-person>p { margin:0; }
+.team-links { margin-top:auto; padding-top:24px; display:flex; flex-wrap:wrap; gap:8px 16px; }
+.team-links a { font-size:9px; text-transform:uppercase; letter-spacing:.12em; color:#cbd0d2; border-bottom:1px solid #52595c; padding-bottom:4px; }
+.team-links a:hover { color:var(--yellow); border-color:var(--yellow); }
+
+/* Благодарности сотрудникам с 20+ годами в компании. */
+.loyalty-stories { margin-top:80px; }
+.loyalty-head { max-width:850px; }
+.loyalty-head h3 { font-size:clamp(34px,4vw,64px); margin:12px 0 0; letter-spacing:-.05em; }
+.loyalty-grid { margin-top:40px; display:grid; grid-template-columns:repeat(4,1fr); border-left:1px solid var(--line); border-top:1px solid var(--line); }
+.loyalty-story { min-height:270px; padding:26px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
+.loyalty-story b { color:var(--yellow); font-size:9px; letter-spacing:.16em; }
+.loyalty-story h4 { margin:52px 0 5px; font-size:27px; letter-spacing:-.04em; }
+.loyalty-story small { color:#737b7e; font-size:9px; letter-spacing:.1em; text-transform:uppercase; }
+.loyalty-story p { margin:20px 0 0; color:#929a9d; font-size:12px; line-height:1.65; }
+.loyalty-compact { margin-top:35px; }
+
+/* Раздел новостей / 30 Jahre. */
+.news { background:#e3dfd5; color:#101214; }
+.news .eyebrow { color:#7c6b35; }
+.news .section-intro { color:#62676a; }
+.news-card { position:relative; display:grid; grid-template-columns:190px 1fr 230px; gap:40px; align-items:center; min-height:270px; padding:38px 0; border-top:1px solid #a9aaa5; border-bottom:1px solid #a9aaa5; overflow:hidden; }
+.news-card>span { color:#856a1f; font-size:10px; letter-spacing:.18em; font-weight:800; }
+.news-card h3 { margin:0 0 14px; font-size:clamp(32px,4vw,60px); letter-spacing:-.05em; }
+.news-card p { margin:0; max-width:680px; color:#505658; line-height:1.7; }
+.news-card>strong { text-align:right; font-size:clamp(100px,15vw,230px); line-height:.7; letter-spacing:-.1em; color:rgba(133,106,31,.16); }
+
+/* Вакансии: в карточках теперь есть описание и настоящая ссылка. */
+.career-actions { margin-top:26px; display:flex; align-items:center; flex-wrap:wrap; gap:20px; }
+.text-link { font-size:11px; letter-spacing:.08em; color:#c9cdcf; border-bottom:1px solid #60676a; padding-bottom:5px; }
+.jobs article { position:relative; min-height:210px; }
+.jobs article p { margin:14px 50px 0 0; color:#8f979a; font-size:11px; line-height:1.6; max-width:520px; }
+.jobs article>a { position:absolute; right:28px; top:50%; transform:translateY(-50%); color:var(--yellow); font-size:24px; }
+
+/* Партнёрская компания 3 Point GmbH. */
+.partner { background:#101315; }
+.partner-panel { display:grid; grid-template-columns:1fr .8fr; gap:9vw; align-items:end; padding:70px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.partner-panel h2 { margin:14px 0 0; font-size:clamp(48px,6.5vw,100px); line-height:.88; letter-spacing:-.065em; }
+.partner-copy p { color:#a7aeb0; line-height:1.75; margin:0 0 18px; }
+.partner-copy b { color:#f0f1f1; }
+.partner-copy .cta { margin-top:16px; }
+
+/* Маленькая ссылка на маршрут в контактном блоке. */
+.contact-grid .mini-link { display:inline-block; margin-top:16px; font-size:9px; text-transform:uppercase; letter-spacing:.12em; color:#9ea6a9; }
+
+/* Подвал: юридические и служебные ссылки. */
+.footer-links { display:flex; flex-wrap:wrap; gap:12px 18px; }
+.footer-links a { font-size:9px; letter-spacing:.1em; color:#8d9598; }
+.footer-links a:hover { color:var(--yellow); }
+
+/* =========================================================
+   MOBILE DOKA 700
+   Надписи сидят на самой стойке. Жёлтая лента идёт поперёк,
+   как будто стойка обмотана скотчем.
+   ========================================================= */
+@media(max-width:760px) {
+  .mobile-prop700 .prop-tape { position:absolute; left:-7px; top:143px; width:62px; height:14px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#f0c44c,#d89c22); color:#132b55; font-size:8px; font-weight:900; letter-spacing:.12em; border:1px solid rgba(82,58,10,.82); border-radius:3px; box-shadow:0 2px 6px rgba(0,0,0,.15); z-index:4; }
+  .mobile-prop700 .prop-brand { position:absolute; left:12px; top:72px; transform:rotate(90deg); transform-origin:left top; font-size:10px; line-height:1; letter-spacing:.18em; color:#132b55; font-weight:900; z-index:5; }
+  .mobile-prop700 .prop-code { position:absolute; left:31px; right:auto; top:auto; bottom:56px; transform:rotate(90deg); transform-origin:left top; font-style:normal; font-size:14px; line-height:1; letter-spacing:.08em; color:#132b55; font-weight:900; z-index:5; }
+}
+
+/* Планшет: меню уже скрывается, а контент делаем компактнее. */
+@media(max-width:1100px) {
+  .nav { gap:14px; }
+  .nav a { font-size:9px; letter-spacing:.09em; }
+  .reference-archive-grid { grid-template-columns:repeat(3,1fr); }
+  .loyalty-grid { grid-template-columns:repeat(2,1fr); }
+  .news-card { grid-template-columns:150px 1fr 160px; }
+}
+
+/* Телефон: все информационные блоки складываются в одну колонку. */
+@media(max-width:760px) {
+  .about-grid { grid-template-columns:1fr; }
+  .about-card { min-height:260px; padding:26px 20px; }
+  .service-cta-row { align-items:flex-start; flex-direction:column; }
+  .reference-archive { margin-top:60px; }
+  .reference-archive-grid { grid-template-columns:1fr 1fr; }
+  .reference-archive-grid article { min-height:125px; padding:18px; }
+  .leadership .team-card { min-height:0; }
+  .team-photo { height:300px; }
+  .team-person { min-height:170px; }
+  .loyalty-stories { margin-top:60px; }
+  .loyalty-grid { grid-template-columns:1fr; }
+  .loyalty-story { min-height:220px; }
+  .loyalty-story h4 { margin-top:36px; }
+  .news-card { grid-template-columns:1fr; gap:24px; padding:28px 0; }
+  .news-card>strong { position:absolute; right:0; bottom:20px; font-size:38vw; z-index:0; }
+  .news-card>div,.news-card>span { position:relative; z-index:1; }
+  .partner-panel { grid-template-columns:1fr; gap:40px; padding:45px 0; }
+  .partner-panel h2 { font-size:14vw; }
+  .career-actions { align-items:flex-start; flex-direction:column; }
+  .jobs article { min-height:230px; }
+  .jobs article p { margin-right:42px; }
+  footer { gap:24px; }
+  .footer-links { flex-direction:column; }
+}
+
+@media(max-width:390px) {
+  .reference-archive-grid { grid-template-columns:1fr; }
+  .team-photo { height:270px; }
+  .mobile-prop700 .prop-tape { left:-6px; width:58px; top:141px; }
+  .mobile-prop700 .prop-brand { top:74px; left:13px; font-size:9px; }
+  .mobile-prop700 .prop-code { left:31px; bottom:58px; font-size:13px; }
+}
+
+/* Исправление мобильного переполнения: декоративные элементы не должны расширять страницу. */
+html { overflow-x:hidden; }
+@media(max-width:760px) {
+  .partner-panel > * { min-width:0; }
+  .partner-panel h2 { font-size:12vw; }
+}
+
+/* Sticky-анимация должна оставаться рабочей. Для этого не используем overflow-x:hidden на корневом html. */
+html { overflow-x:visible; }
+body { overflow-x:clip; }
+
+/* Финальная настройка ритма: линии остаются архитектурной сеткой,
+   а текст больше не лежит прямо на них. */
+.history.section-pad {
+  padding-top:clamp(72px,9vh,112px);
+  padding-bottom:clamp(72px,9vh,112px);
+}
+.timeline {
+  margin-top:clamp(48px,6vh,72px);
+}
+.timeline article {
+  position:relative;
+  min-height:205px;
+  padding:34px 28px 24px 0;
+}
+.timeline article::before {
+  content:"";
+  position:absolute;
+  top:-4px;
+  left:0;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#9a7720;
+  box-shadow:0 0 0 5px #e7e4dc;
+}
+.timeline b {
+  display:block;
+  line-height:1.25;
+}
+.timeline h3 {
+  margin:48px 0 12px;
+  line-height:1.08;
+}
+
+.partner.section-pad {
+  padding-top:clamp(72px,9vh,112px);
+  padding-bottom:clamp(72px,9vh,112px);
+}
+.partner-panel {
+  padding:clamp(42px,5.5vh,64px) 0;
+  align-items:center;
+}
+
+.contact.section-pad {
+  min-height:0;
+  padding-top:clamp(82px,10vh,124px);
+  padding-bottom:clamp(76px,9vh,112px);
+  justify-content:flex-start;
+}
+.contact>h2 {
+  margin:20px 0 clamp(42px,5vh,62px);
+}
+.contact-grid>div {
+  min-height:142px;
+  padding:32px 28px 18px 0;
+}
+.contact-grid small {
+  display:block;
+  margin-bottom:14px;
+  line-height:1.2;
+}
+.contact-grid p,
+.contact-grid a {
+  margin-top:0;
+}
+
+@media(max-width:760px) {
+  .history.section-pad,
+  .partner.section-pad,
+  .contact.section-pad {
+    padding-top:72px;
+    padding-bottom:72px;
+  }
+  .timeline {
+    margin-top:46px;
+    border-top:0;
+  }
+  .timeline article {
+    min-height:0;
+    padding:30px 0 28px 18px;
+    border-top:1px solid #c0c0bb;
+  }
+  .timeline article::before {
+    top:-4px;
+  }
+  .timeline h3 {
+    margin:30px 0 10px;
+  }
+  .contact>h2 {
+    margin-bottom:42px;
+  }
+  .contact-grid>div {
+    min-height:132px;
+    padding:26px 18px 18px 0;
+  }
+}
+
+@media(max-width:480px) {
+  .contact-grid {
+    grid-template-columns:1fr;
+  }
+  .contact-grid>div {
+    min-height:0;
+    padding:24px 0;
+    border-right:0;
+    border-bottom:1px solid #33393c;
+  }
+}
+
+/* ======================================================================
+   ВНУТРЕННИЕ СТРАНИЦЫ — ОБЩАЯ СИСТЕМА
+   Эти правила добавлены поверх уже проверенной главной страницы.
+   ====================================================================== */
+.inner-page{background:#090b0c;color:#f3f5f5}
+.inner-main{padding-top:74px;overflow:hidden}
+.inner-page .topbar{background:rgba(7,9,10,.88);backdrop-filter:blur(18px)}
+.inner-page .nav a{white-space:nowrap}
+
+/* Герой внутренних страниц. */
+.page-hero{position:relative;min-height:78vh;padding:clamp(100px,13vh,150px) 5vw 7vw;display:flex;align-items:flex-end;overflow:hidden;background:
+  radial-gradient(circle at 75% 20%,rgba(224,173,48,.11),transparent 28%),
+  linear-gradient(135deg,#171b1e 0%,#0c0f11 45%,#060708 100%);border-bottom:1px solid rgba(255,255,255,.08)}
+.page-hero:before{content:"";position:absolute;inset:0;opacity:.28;background-image:
+  repeating-linear-gradient(0deg,transparent 0 79px,rgba(255,255,255,.045) 80px 81px),
+  repeating-linear-gradient(90deg,transparent 0 119px,rgba(255,255,255,.03) 120px 121px)}
+.page-hero-copy{position:relative;z-index:4;width:min(760px,55vw)}
+.page-hero-copy h1{font-size:clamp(68px,8.7vw,150px);line-height:.82;letter-spacing:-.075em;margin:22px 0 30px;font-weight:900}
+.page-hero-copy h1 span{color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.55)}
+.page-hero-copy>p:last-child{max-width:610px;color:#c7cbcd;line-height:1.7;font-size:15px}
+
+/* Крупный переход в следующий раздел. */
+.page-next{padding:68px 5vw 80px;background:#d9d8d2;color:#111516}
+.page-next a{margin-top:20px;border-top:1px solid #8f928e;border-bottom:1px solid #8f928e;min-height:140px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:inherit}
+.page-next a span{font-size:clamp(44px,6vw,96px);font-weight:900;letter-spacing:-.06em}
+.page-next a b{font-size:42px;color:#a77916}
+
+/* Универсальный CTA в конце страницы. */
+.page-cta{padding:72px 5vw;display:flex;align-items:end;justify-content:space-between;gap:40px;background:#171b1e;border-top:1px solid #303638}
+.page-cta h2{margin:8px 0 0;font-size:clamp(38px,5vw,76px);line-height:.92;letter-spacing:-.055em}
+.page-cta p{color:#aeb4b6}
+
+/* Два входа из главной страницы Über uns. */
+.about-portals{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#313638!important;padding:1px!important}
+.about-portal{position:relative;display:block;min-height:330px;padding:42px;background:#111416;color:#f3f4f4;text-decoration:none;overflow:hidden}
+.about-portal:before{content:"";position:absolute;right:-90px;bottom:-160px;width:360px;height:360px;border:1px solid rgba(224,173,48,.2);border-radius:50%;transition:.4s ease}
+.about-portal:hover:before{transform:scale(1.12);border-color:rgba(224,173,48,.55)}
+.about-portal small{font-size:9px;letter-spacing:.18em;color:#9ca3a6}
+.about-portal h2{font-size:clamp(44px,5vw,76px);letter-spacing:-.06em;margin:74px 0 14px}
+.about-portal p{max-width:440px;color:#aeb4b6;line-height:1.65}
+.about-portal b{position:absolute;right:38px;top:36px;color:var(--yellow);font-size:32px}
+.section-more{display:inline-block;margin-top:18px;font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#9b711d;text-decoration:none}
+
+/* ======================================================================
+   TEAM — четыре схематичных человека сверху и карточки руководства.
+   ====================================================================== */
+.page-hero-team{min-height:84vh}
+.crew-illustration{position:absolute;z-index:3;right:3vw;bottom:0;width:min(620px,46vw);height:72%;filter:drop-shadow(0 26px 28px rgba(0,0,0,.45))}
+.crew-person{position:absolute;bottom:0;width:118px;height:360px;transform-origin:50% 100%}
+.crew-a{left:2%;transform:scale(.9)}.crew-b{left:25%;transform:scale(1.02)}.crew-c{left:51%;transform:scale(.95)}.crew-d{left:75%;transform:scale(.88)}
+.crew-head{position:absolute;left:42px;top:52px;width:34px;height:38px;border-radius:45% 45% 38% 38%;background:#bc8061}
+.crew-helmet{position:absolute;left:31px;top:34px;width:58px;height:30px;border-radius:50px 50px 8px 8px;background:#e4e6e6;border-bottom:6px solid #b9bfc1;z-index:3}
+.crew-body{position:absolute;left:18px;top:86px;width:84px;height:150px;border-radius:16px 16px 8px 8px;background:linear-gradient(180deg,#e2b037,#b7801c);border:1px solid #685019;text-align:center;padding-top:46px;color:#16191a;font-size:12px;font-weight:900}
+.crew-body:after{content:"";position:absolute;left:4px;right:4px;top:55px;height:16px;background:rgba(230,233,233,.7);border-top:2px solid rgba(255,255,255,.35);border-bottom:2px solid rgba(255,255,255,.25)}
+.crew-arm,.crew-leg{position:absolute;background:#2a2e30;border-radius:10px}
+.crew-arm{top:104px;width:24px;height:126px;background:#c28e37}.crew-arm.left{left:0;transform:rotate(8deg)}.crew-arm.right{right:0;transform:rotate(-8deg)}
+.crew-leg{top:225px;width:32px;height:132px}.crew-leg.left{left:26px;transform:rotate(2deg)}.crew-leg.right{right:26px;transform:rotate(-2deg)}
+.crew-b .crew-body,.crew-d .crew-body{background:linear-gradient(180deg,#d8a52f,#aa7617)}
+.leadership-section{background:#e1e0da;color:#111516}
+.leadership-photo-grid{grid-template-columns:repeat(2,1fr);gap:1px;background:#aeb0ac;padding:1px}
+.leadership-photo-grid .team-card{background:#d9d8d2;display:grid;grid-template-columns:46% 54%;min-height:390px}
+.leadership-photo-grid .team-photo{min-height:390px;background:#202528;position:relative;overflow:hidden}
+.leadership-photo-grid .team-photo:after{content:"FOTO";position:absolute;right:14px;bottom:12px;color:#565e61;font-size:8px;letter-spacing:.2em}
+.leadership-photo-grid .team-initials{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:82px;font-weight:900;color:#343a3d;letter-spacing:-.08em}
+.leadership-photo-grid .team-photo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.leadership-photo-grid .team-photo-img[src]:not([src=""]){display:block}
+.leadership-photo-grid .team-person{padding:34px;display:flex;flex-direction:column;justify-content:flex-end}
+.leadership-photo-grid .team-person small{font-size:8px;letter-spacing:.15em;color:#686e70}
+.leadership-photo-grid .team-person h3{font-size:clamp(34px,3.8vw,58px);letter-spacing:-.06em;margin:14px 0 28px}
+.team-strength{background:#111416!important}
+
+/* ======================================================================
+   ИСТОРИЯ — два стилизованных основателя.
+   ====================================================================== */
+.founders-illustration{position:absolute;right:4vw;bottom:0;width:min(560px,42vw);height:72%;z-index:3}
+.founder{position:absolute;bottom:0;width:185px;height:390px}
+.founder-graziano{left:4%}.founder-bruno{right:7%;transform:scale(.96)}
+.founder .face{position:absolute;left:65px;top:46px;width:56px;height:64px;border-radius:44% 44% 40% 40%;background:#bd8060}
+.founder .shirt{position:absolute;left:30px;top:105px;width:126px;height:170px;border-radius:16px 16px 6px 6px;background:linear-gradient(180deg,#ddb03e,#b47c1b);border:1px solid #684c12;display:flex;align-items:center;justify-content:center}
+.founder .shirt b{transform:rotate(-90deg);font-size:13px;letter-spacing:.11em;color:#152033}
+.hair{position:absolute;z-index:4}.hair-spiky{left:55px;top:19px;width:78px;height:52px;background:#313538;clip-path:polygon(0 80%,8% 24%,20% 62%,28% 10%,40% 58%,50% 0,60% 58%,72% 12%,80% 62%,94% 22%,100% 82%,88% 100%,10% 100%)}
+.hair-bald{left:68px;top:39px;width:50px;height:18px;border-radius:50% 50% 20% 20%;border-top:5px solid #5d4b40;opacity:.35}
+.f-arm,.f-leg{position:absolute;border-radius:14px}.f-arm{top:125px;width:34px;height:145px;background:#c58c36}.f-arm.l{left:10px;transform:rotate(8deg)}.f-arm.r{right:10px;transform:rotate(-8deg)}
+.f-leg{top:270px;width:44px;height:118px;background:#272b2d}.f-leg.l{left:45px}.f-leg.r{right:45px}
+.history-full{background:#d9d8d2;color:#111516}
+.timeline-full{grid-template-columns:repeat(5,1fr)}
+.timeline-full article{min-height:360px}
+.values-strip{display:grid;grid-template-columns:repeat(3,1fr);background:#1a1f21;color:#f2f3f3;border-top:1px solid #343a3d}
+.values-strip article{padding:46px 38px;min-height:270px;border-right:1px solid #343a3d}
+.values-strip article:last-child{border-right:0}
+.values-strip small{font-size:8px;letter-spacing:.18em;color:#d2a638}
+.values-strip h3{font-size:32px;letter-spacing:-.05em;margin:42px 0 14px}.values-strip p{color:#9fa6a9;line-height:1.6}
+
+/* ======================================================================
+   УСЛУГИ — графика DOKA и детальные строки.
+   ====================================================================== */
+.service-hero-drawing{position:absolute;right:4vw;bottom:10%;width:min(560px,42vw);height:58%;z-index:3}
+.h20-stack{position:absolute;left:0;bottom:12%;width:76%;height:150px;transform:rotate(-7deg);filter:drop-shadow(0 20px 20px rgba(0,0,0,.35))}
+.h20-stack i{display:block;height:26px;margin:0;background:#e4ad32;border:2px solid #745413;box-shadow:inset 0 5px rgba(68,50,16,.55);position:relative}
+.h20-stack i:after{content:"DOKA";position:absolute;right:18px;top:5px;font-size:10px;font-weight:900;letter-spacing:.12em;color:#16305a}
+.h20-stack b{position:absolute;right:26px;top:-44px;color:#d7ab36;font-size:18px;letter-spacing:.18em}
+.prop-drawing{position:absolute;right:4%;top:0;width:70px;height:90%;background:linear-gradient(90deg,#b9c1c7,#e0e4e7,#8f999f);border-radius:8px;border:1px solid #6a747b}
+.prop-drawing:before,.prop-drawing:after{content:"";position:absolute;left:-7px;width:84px;height:18px;background:#548bc3;border:1px solid #315b83}.prop-drawing:before{top:32px}.prop-drawing:after{bottom:34px}
+.prop-drawing span{position:absolute;left:-6px;top:58%;width:82px;padding:7px 0;text-align:center;background:#e5ad32;color:#16305a;font-size:10px;font-weight:900;letter-spacing:.12em}.prop-drawing b{position:absolute;top:43%;left:22px;transform:rotate(90deg);font-size:18px;color:#17325d}
+.service-page-grid{background:#d9d8d2!important;color:#111516}
+.service-detail{display:grid;grid-template-columns:110px 1fr;gap:36px;padding:42px 0;border-top:1px solid #9da09d}.service-detail:last-child{border-bottom:1px solid #9da09d}
+.service-detail>span{font-size:38px;font-weight:800;color:#b2831e}.service-detail h2{font-size:clamp(36px,4vw,64px);letter-spacing:-.06em;margin:0 0 18px}.service-detail p{max-width:870px;color:#474d4f;line-height:1.7;font-size:15px}
+.safety-banner{display:grid;grid-template-columns:1fr 1fr;gap:60px;background:#111416!important}.safety-banner h2{font-size:clamp(44px,5vw,82px);letter-spacing:-.06em;line-height:.9;margin-top:15px}.safety-banner>p{align-self:end;color:#b6bbbd;line-height:1.75;max-width:720px}
+
+/* ======================================================================
+   REFERENZEN — сохраняем старые карточки и добавляем техничный герой.
+   ====================================================================== */
+.reference-lines{position:absolute;right:5vw;top:17%;width:min(520px,40vw);height:64%;z-index:3;border:1px solid rgba(224,173,48,.25)}
+.reference-lines i{position:absolute;background:rgba(255,255,255,.14)}.reference-lines i:nth-child(1){left:18%;top:0;bottom:0;width:1px}.reference-lines i:nth-child(2){right:21%;top:0;bottom:0;width:1px}.reference-lines i:nth-child(3){left:0;right:0;top:52%;height:1px}
+.reference-lines:after{content:"";position:absolute;left:20%;top:15%;width:55%;height:58%;border:5px solid #d6a432;border-top-width:12px;transform:perspective(700px) rotateX(55deg) rotateZ(-11deg);box-shadow:16px 16px 0 rgba(214,164,50,.14)}
+.reference-lines b{position:absolute;right:18px;bottom:15px;font-size:clamp(28px,3vw,48px);color:#d7aa35;letter-spacing:-.05em}
+
+/* ======================================================================
+   AKTUELL — юбилейный знак.
+   ====================================================================== */
+.anniversary-mark{position:absolute;right:7vw;bottom:12%;z-index:3;display:flex;align-items:end;gap:18px}
+.anniversary-mark strong{font-size:clamp(150px,18vw,300px);line-height:.72;letter-spacing:-.09em;color:transparent;-webkit-text-stroke:2px rgba(224,173,48,.75)}
+.anniversary-mark span{font-size:17px;font-weight:900;letter-spacing:.15em;color:#d7aa35;margin-bottom:12px}
+.news-page{background:#d9d8d2!important;color:#111516}.news-feature{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;border-top:1px solid #999d99;border-bottom:1px solid #999d99;padding:50px 0}.news-feature span{font-size:9px;letter-spacing:.18em;color:#8c671c}.news-feature h2{font-size:clamp(48px,7vw,106px);letter-spacing:-.07em;margin:18px 0}.news-feature p{max-width:720px;line-height:1.7;color:#484e50}.news-feature>strong{font-size:clamp(120px,18vw,280px);line-height:.7;color:#bf8b1d;letter-spacing:-.08em}.news-empty{margin-top:80px;max-width:800px}.news-empty h3{font-size:36px;letter-spacing:-.04em;margin:14px 0}.news-empty p:last-child{color:#5c6264;line-height:1.65}
+
+/* ======================================================================
+   ВАКАНСИИ — три рабочих с каской, планом и контрактом.
+   ====================================================================== */
+.jobs-illustration{position:absolute;right:3vw;bottom:0;width:min(650px,48vw);height:68%;z-index:3}
+.job-person{position:absolute;bottom:0;width:160px;height:380px}.job-helmet{left:2%}.job-plan{left:36%;transform:scale(1.02)}.job-contract{right:3%;transform:scale(.95)}
+.job-person .head{position:absolute;left:55px;top:35px;width:50px;height:58px;background:#b97d5f;border-radius:45%}.job-person .body{position:absolute;left:28px;top:88px;width:105px;height:182px;background:linear-gradient(#dfad35,#b47d19);border-radius:14px;padding-top:58px;text-align:center;font-style:normal;font-size:12px;font-weight:900;color:#16191a}.job-person .body:after{content:"";position:absolute;left:5px;right:5px;top:66px;height:16px;background:rgba(234,236,236,.65)}
+.job-person:before,.job-person:after{content:"";position:absolute;top:260px;width:38px;height:118px;background:#24282a;border-radius:12px}.job-person:before{left:40px}.job-person:after{right:40px}
+.job-person .object{position:absolute;z-index:4}.helmet-object{left:0;top:175px;width:58px;height:32px;border-radius:50px 50px 8px 8px;background:#e5e8e8;border-bottom:5px solid #aeb5b8}.plan-object{right:-12px;top:145px;width:100px;height:74px;background:#e4e8e9;border:3px solid #4875a6;transform:rotate(-12deg);box-shadow:inset 0 0 0 7px #c7d6e5}.plan-object:after{content:"PLAN";position:absolute;right:8px;bottom:5px;color:#3f6f9e;font-size:8px;font-weight:900}.contract-object{right:-8px;top:143px;width:76px;height:100px;background:#f1f2ef;border:1px solid #989e9f;transform:rotate(8deg)}.contract-object:after{content:"VERTRAG";position:absolute;left:10px;top:12px;color:#333b3d;font-size:8px;font-weight:900;letter-spacing:.08em;border-bottom:2px solid #d5a634;padding-bottom:8px;width:54px}
+.jobs-page{background:#d9d8d2!important;color:#111516}.jobs-large{grid-template-columns:repeat(3,1fr)}.jobs-large article{min-height:360px;background:#c9c8c3;color:#111516;border-color:#9da09d}.jobs-large article a{position:static;display:inline-block;margin-top:35px;color:#936b18;text-decoration:none;font-weight:800;font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+
+/* ======================================================================
+   3 POINT — чертёжная сетка и карточки услуг.
+   ====================================================================== */
+.blueprint-visual{position:absolute;right:4vw;top:15%;width:min(600px,44vw);height:68%;z-index:3;border:1px solid rgba(100,153,208,.35);background:#0d1c2b;overflow:hidden;box-shadow:0 22px 50px rgba(0,0,0,.28)}
+.bp-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(94,148,203,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(94,148,203,.11) 1px,transparent 1px);background-size:24px 24px}
+.blueprint-visual svg{position:absolute;inset:5%;width:90%;height:90%;fill:none;stroke:#8bb6df;stroke-width:2}.blueprint-visual svg text{fill:#e0ad30;stroke:none;font-size:22px;font-weight:900;letter-spacing:.13em}
+.partner-services{background:#d9d8d2!important;color:#111516}.partner-service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#9da09d;margin-top:55px}.partner-service-grid article{background:#d9d8d2;min-height:300px;padding:34px;position:relative}.partner-service-grid span{font-size:32px;color:#9b711c;font-weight:900}.partner-service-grid h3{font-size:38px;letter-spacing:-.055em;margin:65px 0 16px}.partner-service-grid p{color:#505658;line-height:1.65;max-width:560px}.partner-promises{grid-template-columns:repeat(3,1fr)}
+
+/* ======================================================================
+   КОНТАКТ — крупный индекс места.
+   ====================================================================== */
+.contact-hero-mark{position:absolute;right:6vw;bottom:12%;z-index:3;text-align:right}.contact-hero-mark b{display:block;font-size:clamp(120px,15vw,260px);line-height:.7;letter-spacing:-.08em;color:transparent;-webkit-text-stroke:2px rgba(224,173,48,.7)}.contact-hero-mark span{font-size:18px;letter-spacing:.25em;color:#d4aa3d;font-weight:900}.contact-page{background:#d9d8d2!important;color:#111516}.contact-page .contact-grid{margin-top:0}.contact-page .contact-grid>div{border-color:#9da09d}.contact-page .contact-grid a{color:#111516}
+
+/* Плавное появление внутренних секций. */
+.inner-page .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}.inner-page .reveal.is-visible{opacity:1;transform:none}
+
+/* ======================================================================
+   АДАПТАЦИЯ ВНУТРЕННИХ СТРАНИЦ
+   ====================================================================== */
+@media(max-width:1100px){
+  .inner-main{padding-top:74px}.page-hero{min-height:72vh}.page-hero-copy{width:56vw}.page-hero-copy h1{font-size:8.8vw}
+  .crew-illustration,.founders-illustration,.service-hero-drawing,.reference-lines,.blueprint-visual,.jobs-illustration{right:1vw;width:45vw}
+  .timeline-full{grid-template-columns:repeat(3,1fr)}.timeline-full article:nth-child(n+4){border-top:1px solid #aaa}
+  .leadership-photo-grid .team-card{grid-template-columns:42% 58%}
+}
+@media(max-width:980px){
+  .inner-main{padding-top:74px}.page-hero{padding-left:26px;padding-right:26px}.page-hero-copy{width:58vw}.page-hero-copy h1{font-size:9.7vw}
+  .about-portals{grid-template-columns:1fr}.about-portal{min-height:260px}.about-portal h2{margin-top:55px}
+  .leadership-photo-grid{grid-template-columns:1fr}.leadership-photo-grid .team-card{min-height:330px}.leadership-photo-grid .team-photo{min-height:330px}
+  .timeline-full{grid-template-columns:1fr 1fr}.values-strip{grid-template-columns:1fr}.values-strip article{border-right:0;border-bottom:1px solid #343a3d;min-height:210px}
+  .jobs-large{grid-template-columns:1fr}.partner-service-grid{grid-template-columns:1fr}.page-cta{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:760px){
+  .inner-main{padding-top:64px}.page-hero{min-height:74vh;padding:92px 18px 28px;align-items:flex-start}.page-hero-copy{width:64vw;z-index:6}.page-hero-copy h1{font-size:14vw;line-height:.86;margin:18px 0}.page-hero-copy>p:last-child{font-size:11px;line-height:1.55}
+  .page-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,7,8,.8) 0%,rgba(6,7,8,.42) 58%,rgba(6,7,8,.08) 100%);z-index:2;pointer-events:none}
+  .crew-illustration{right:-42px;width:58vw;height:60%;z-index:3}.crew-person{width:78px;height:290px}.crew-head{left:27px;top:45px;width:25px;height:29px}.crew-helmet{left:19px;top:31px;width:42px;height:23px}.crew-body{left:9px;top:70px;width:62px;height:122px;padding-top:38px}.crew-arm{top:83px;width:18px;height:100px}.crew-leg{top:188px;width:24px;height:100px}.crew-leg.left{left:16px}.crew-leg.right{right:16px}.crew-a{left:0}.crew-b{left:23%}.crew-c{left:48%}.crew-d{left:73%}
+  .founders-illustration{right:-28px;width:52vw;height:58%;z-index:3}.founder{width:110px;height:300px}.founder .face{left:38px;top:42px;width:38px;height:44px}.founder .shirt{left:15px;top:82px;width:86px;height:132px}.founder .shirt b{font-size:8px}.hair-spiky{left:31px;top:22px;width:52px;height:38px}.hair-bald{left:41px;top:36px;width:34px}.f-arm{top:100px;width:23px;height:111px}.f-leg{top:210px;width:30px;height:88px}.f-leg.l{left:27px}.f-leg.r{right:27px}.founder-graziano{left:0}.founder-bruno{right:0}
+  .service-hero-drawing{right:-40px;bottom:3%;width:58vw;height:47%;z-index:3}.h20-stack{width:78%;height:120px}.h20-stack i{height:21px}.prop-drawing{width:50px}.prop-drawing:before,.prop-drawing:after{left:-5px;width:60px;height:13px}.prop-drawing span{left:-5px;width:60px;font-size:7px}.prop-drawing b{left:15px;font-size:13px}
+  .reference-lines{right:-70px;top:35%;width:55vw;height:45%;z-index:3}.reference-lines b{font-size:22px}.anniversary-mark{right:-25px;bottom:12%;z-index:3}.anniversary-mark strong{font-size:38vw}.anniversary-mark span{font-size:10px}
+  .jobs-illustration{right:-36px;width:59vw;height:55%;z-index:3}.job-person{width:90px;height:290px}.job-person .head{left:30px;top:34px;width:32px;height:38px}.job-person .body{left:14px;top:68px;width:64px;height:134px;padding-top:42px;font-size:8px}.job-person:before,.job-person:after{top:195px;width:24px;height:94px}.job-person:before{left:22px}.job-person:after{right:22px}.helmet-object{width:42px;height:24px;top:138px}.plan-object{width:70px;height:52px;top:120px;right:-22px}.contract-object{width:54px;height:74px;top:118px;right:-15px}
+  .blueprint-visual{right:-56px;top:36%;width:60vw;height:42%;z-index:3}.contact-hero-mark{right:-8px;bottom:18%;z-index:3}.contact-hero-mark b{font-size:34vw}.contact-hero-mark span{font-size:11px}
+  .page-next,.page-cta{padding-left:18px;padding-right:18px}.page-next a{min-height:110px}.page-next a span{font-size:11vw}.about-portal{padding:26px;min-height:230px}.about-portal h2{font-size:11vw;margin-top:45px}.about-portal b{right:24px;top:23px}
+  .leadership-photo-grid .team-card{grid-template-columns:1fr;min-height:0}.leadership-photo-grid .team-photo{min-height:330px}.leadership-photo-grid .team-person{min-height:220px;padding:25px}.leadership-photo-grid .team-person h3{font-size:11vw;margin:10px 0 22px}
+  .timeline-full{grid-template-columns:1fr}.timeline-full article{min-height:240px}.service-detail{grid-template-columns:58px 1fr;gap:15px}.service-detail>span{font-size:26px}.service-detail h2{font-size:10vw}.service-detail p{font-size:12px}.safety-banner{grid-template-columns:1fr;gap:28px}.safety-banner h2{font-size:11vw}.partner-service-grid article{min-height:250px;padding:25px}.partner-service-grid h3{font-size:9vw;margin-top:45px}.news-feature{grid-template-columns:1fr}.news-feature>strong{font-size:36vw}.page-cta h2{font-size:11vw}
+  .values-strip article{padding:34px 20px}.values-strip h3{font-size:28px;margin-top:30px}
+}
+@media(max-width:390px){.page-hero-copy{width:67vw}.page-hero-copy h1{font-size:14.5vw}.crew-illustration{right:-48px}.founders-illustration{right:-34px}.blueprint-visual{right:-72px}}
+
+
+/* Production accessibility & navigation polish. */
+.skip-link{position:fixed;left:16px;top:-80px;z-index:9999;background:#e0ad30;color:#080a0b;padding:12px 16px;font-weight:800;text-decoration:none;transition:top .2s}
+.skip-link:focus{top:14px}
+.nav a[aria-current="page"]{color:var(--yellow)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+.legal-copy{max-width:920px}.legal-copy h2{font-size:clamp(30px,4vw,58px);letter-spacing:-.04em;margin:54px 0 18px}.legal-copy p,.legal-copy li{color:#c7cbcd;line-height:1.75}.legal-copy ul{padding-left:20px}.legal-copy a{color:#e0ad30}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1!important;transform:none!important}}
+
+
+/* ======================================================================
+   V4 — MAP, PROCESS, CTA, MICRO-TRANSITIONS
+   ====================================================================== */
+.page-transition{position:fixed;z-index:10000;left:0;right:0;top:0;height:4px;background:var(--yellow);transform:scaleX(0);transform-origin:left;pointer-events:none;box-shadow:0 0 28px rgba(228,178,47,.28)}
+.page-transition.is-entering{animation:fbg-line-in .42s cubic-bezier(.2,.75,.2,1) both}.page-transition.is-leaving{animation:fbg-line-out .28s ease both}
+@keyframes fbg-line-in{0%{transform:scaleX(1);transform-origin:left}100%{transform:scaleX(0);transform-origin:right}}@keyframes fbg-line-out{0%{transform:scaleX(0);transform-origin:left}100%{transform:scaleX(1);transform-origin:left}}
+
+.numbers .metric strong[data-count]{font-variant-numeric:tabular-nums}
+.work-process{background:#d7d6d0;color:#111516;border-top:1px solid #b3b4b0}.work-process .eyebrow{color:#6f7474}.work-process .section-intro{color:#53595a}
+.process-track{display:grid;grid-template-columns:repeat(4,1fr);margin-top:70px;border-top:1px solid #979b99;border-bottom:1px solid #979b99;position:relative}
+.process-track:before{content:"";position:absolute;left:7%;right:7%;top:91px;height:2px;background:linear-gradient(90deg,#b8b9b5 0 8%,var(--yellow) 8% 92%,#b8b9b5 92%);z-index:0}
+.process-track article{position:relative;z-index:1;min-height:380px;padding:26px 30px 34px;border-right:1px solid #a9aaa6}.process-track article:last-child{border-right:0}.process-track article>span{font-size:9px;letter-spacing:.16em;color:#8d6720;font-weight:900}
+.process-track h3{font-size:clamp(30px,3vw,48px);letter-spacing:-.05em;margin:30px 0 12px}.process-track p{font-size:13px;line-height:1.65;color:#5c6262;max-width:250px}
+.process-icon{width:108px;height:108px;margin:30px 0 8px;position:relative;background:#181c1e;border-radius:50%;box-shadow:0 12px 32px rgba(0,0,0,.12)}.process-icon i{position:absolute;display:block}.icon-plan i:nth-child(1){left:28px;top:25px;width:52px;height:58px;border:2px solid #e7e9e8}.icon-plan i:nth-child(2){left:39px;top:38px;width:30px;height:2px;background:var(--yellow);box-shadow:0 10px 0 #8d9698,0 20px 0 #8d9698}.icon-plan i:nth-child(3){right:20px;bottom:22px;width:28px;height:5px;background:var(--yellow);transform:rotate(-46deg)}
+.icon-form i:nth-child(1){left:25px;right:25px;bottom:27px;height:10px;background:#e3a928;box-shadow:0 -19px 0 #d2951a,0 -38px 0 #e3a928}.icon-form i:nth-child(2){left:31px;top:26px;width:4px;height:56px;background:#71797c;box-shadow:42px 0 0 #71797c}.icon-form i:nth-child(3){left:20px;right:20px;bottom:20px;height:3px;background:#aeb4b5}
+.icon-pour i:nth-child(1){left:28px;top:26px;width:42px;height:35px;border:3px solid #d7d9d8;border-top:0;transform:skewX(-8deg)}.icon-pour i:nth-child(2){left:67px;top:56px;width:5px;height:30px;background:var(--yellow);transform:rotate(22deg);transform-origin:top}.icon-pour i:nth-child(3){left:48px;bottom:20px;width:33px;height:9px;border-radius:50%;background:#909799}
+.icon-result i:nth-child(1){left:22px;right:22px;bottom:26px;height:44px;background:linear-gradient(135deg,#bcc1c0,#6e7678)}.icon-result i:nth-child(2){left:22px;right:22px;top:31px;height:5px;background:var(--yellow)}.icon-result i:nth-child(3){right:26px;top:21px;width:26px;height:13px;border-left:3px solid #eff1f0;border-bottom:3px solid #eff1f0;transform:rotate(-45deg)}
+
+.project-map{background:#0d1012;position:relative;overflow:hidden}.project-map:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 68% 44%,rgba(228,178,47,.09),transparent 32%),linear-gradient(120deg,transparent 65%,rgba(255,255,255,.025));pointer-events:none}.map-shell{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.55fr);min-height:610px;margin-top:60px;border:1px solid #2f3437;background:#0a0c0d}.swiss-map{position:relative;min-height:610px;overflow:hidden}.swiss-plot{position:absolute;inset:8% 6% 8% 4%;width:90%;height:84%;overflow:visible}.swiss-outline{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 16px 45px rgba(0,0,0,.25))}.swiss-outline path{fill:#171c1e;stroke:#555e61;stroke-width:2.2;vector-effect:non-scaling-stroke}.map-grid{position:absolute;inset:0;opacity:.24;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:58px 58px;mask-image:linear-gradient(90deg,#000,transparent 94%)}.map-watermark{position:absolute;left:7%;bottom:5%;font-size:clamp(90px,12vw,180px);line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.07);letter-spacing:-.08em}
+.map-point{position:absolute;left:var(--x);top:var(--y);width:18px;height:18px;padding:0;border:0;border-radius:50%;background:transparent;z-index:5;cursor:pointer;transform:translate(-50%,-50%);color:#fff}.map-point i{display:block;position:absolute;inset:4px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 6px rgba(228,178,47,.12),0 0 22px rgba(228,178,47,.45);transition:.2s}.map-point:after{content:"";position:absolute;inset:-7px;border:1px solid rgba(228,178,47,.35);border-radius:50%;opacity:0;transform:scale(.6);transition:.2s}.map-point span{position:absolute;left:20px;top:-4px;white-space:nowrap;font-size:8px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#c9cdce;background:rgba(7,9,10,.76);padding:5px 7px;border:1px solid rgba(255,255,255,.07)}.map-point:hover i,.map-point.is-active i{transform:scale(1.35);background:#fff}.map-point.is-active:after{opacity:1;transform:scale(1)}
+.map-card{border-left:1px solid #303638;padding:48px 38px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,#111517,#090b0c)}.map-card small{font-size:8px;letter-spacing:.2em;color:#8d9395}.map-card>p{font-size:12px;color:var(--yellow);font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin:28px 0 13px}.map-card h3{font-size:clamp(34px,4vw,62px);line-height:.95;letter-spacing:-.055em;margin:0 0 25px}.map-card>span{display:block;color:#aab0b2;line-height:1.6;border-top:1px solid #2c3234;padding-top:20px}.map-card a{margin-top:45px;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#e2b23c;font-weight:800}.map-mobile-list{display:none}
+
+.dual-cta{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #303638;border-bottom:1px solid #303638;background:#0a0c0d}.dual-cta>a{min-height:310px;padding:55px max(28px,5vw);display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:background .25s ease}.dual-cta>a:first-child{border-right:1px solid #303638}.dual-cta>a:before{content:"";position:absolute;width:180px;height:180px;border:1px solid rgba(228,178,47,.2);border-radius:50%;right:-45px;top:-60px;transition:.35s}.dual-cta>a:hover{background:#111517}.dual-cta>a:hover:before{transform:scale(1.4);border-color:rgba(228,178,47,.42)}.dual-cta small{font-size:8px;letter-spacing:.18em;color:#8e9698}.dual-cta strong{display:block;font-size:clamp(34px,4vw,62px);letter-spacing:-.055em;line-height:.98;margin:18px 0 28px;max-width:620px}.dual-cta span{font-size:10px;color:var(--yellow);letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+
+@media(max-width:980px){.process-track{grid-template-columns:1fr 1fr}.process-track article:nth-child(2){border-right:0}.process-track article:nth-child(n+3){border-top:1px solid #a9aaa6}.map-shell{grid-template-columns:1fr}.map-card{border-left:0;border-top:1px solid #303638;min-height:300px}.swiss-map{min-height:540px}.dual-cta{grid-template-columns:1fr}.dual-cta>a:first-child{border-right:0;border-bottom:1px solid #303638}}
+@media(max-width:760px){.process-track{grid-template-columns:1fr;margin-top:35px}.process-track:before{display:none}.process-track article{display:grid;grid-template-columns:82px 1fr;grid-template-rows:auto auto 1fr;gap:0 18px;min-height:220px;padding:24px 18px;border-right:0;border-top:1px solid #a9aaa6}.process-track article:first-child{border-top:0}.process-track article>span{grid-column:2}.process-icon{grid-column:1;grid-row:1/4;width:78px;height:78px;margin:0}.process-track h3{grid-column:2;font-size:34px;margin:10px 0 8px}.process-track p{grid-column:2;font-size:12px}.process-icon{transform:scale(.82);transform-origin:top left}.map-shell{margin-top:35px;min-height:0}.swiss-map{min-height:420px}.swiss-plot{inset:8% 1% 8% -2%;width:100%;height:84%}.map-point span{display:none}.map-card{padding:30px 22px;min-height:270px}.map-card h3{font-size:10vw}.map-mobile-list{display:grid;grid-template-columns:1fr;margin-top:14px;border-top:1px solid #2c3133}.map-mobile-list button{display:grid;gap:5px;text-align:left;padding:18px 0;background:none;border:0;border-bottom:1px solid #252a2c;color:#fff}.map-mobile-list span{color:var(--yellow);font-size:8px;letter-spacing:.16em;text-transform:uppercase}.map-mobile-list b{font-size:16px}.map-mobile-list small{color:#858d90}.dual-cta>a{min-height:230px;padding:34px 18px}.dual-cta strong{font-size:10vw}.page-transition{height:3px}}
+
+/* ======================================================================
+   V4.1 — FINAL RESPONSIVE / HERO POLISH
+   Точечные правки поверх проверенной V4 без смены визуальной концепции.
+   ====================================================================== */
+
+/* `clip` убирает реальный горизонтальный скролл, но не создаёт отдельный
+   scroll-container, поэтому sticky-сцена продолжает работать корректно. */
+html { overflow-x:clip; }
+body { overflow-x:clip; max-width:100%; }
+
+/* Grid-элементы вакансий должны иметь право сжиматься на 320 px. */
+.careers > *,
+.career-copy,
+.jobs { min-width:0; max-width:100%; }
+
+/* Надписи DOKA на H20 держим чёткими и не даём браузеру имитировать
+   слишком жирный шрифт на маленьком SVG. */
+#panel .doka-pack text {
+  letter-spacing:.02em;
+  paint-order:stroke;
+  stroke:transparent;
+  stroke-width:.01px;
+}
+
+@media(max-width:760px) {
+  /* Материал у лестницы переносим вправо: он больше не пересекает FBG
+     и не режет заголовок на телефонах. */
+  .mobile-doka-scene {
+    right:3% !important;
+    top:88px !important;
+    transform:none !important;
+  }
+
+  .careers {
+    width:100%;
+  }
+
+  .career-actions {
+    max-width:100%;
+  }
+}
+
+@media(max-width:390px) {
+  .mobile-doka-scene {
+    right:-1% !important;
+    top:88px !important;
+    transform:scale(.90) !important;
+    transform-origin:top right !important;
+  }
+}
+
+@media(max-width:350px) {
+  .mobile-doka-scene {
+    right:-7% !important;
+    top:86px !important;
+    transform:scale(.84) !important;
+  }
+  .hero-copy { max-width:64vw !important; }
+}
+
+/* ======================================================================
+   V4.2 — HERO DETAIL PASS
+   Правки по визуальному просмотру: кран, брендинг рабочего, мобильный H20
+   и более выразительный финал scroll-сцены.
+   ====================================================================== */
+
+/* Desktop: crane is intentionally framed inside the hero, with air below the topbar. */
+@media (min-width:761px) {
+  .construction { top:0 !important; }
+}
+
+/* Keep H20 branding away from the two vertical transport straps. */
+#panel .doka-pack text {
+  font-size:7.4px;
+  letter-spacing:.01em;
+}
+#panel .doka-pack .h20 text:nth-of-type(1) { transform:translateX(4px); }
+#panel .doka-pack .h20 text:nth-of-type(2) { transform:translateX(0); }
+#panel .doka-pack .h20 text:nth-of-type(3) { transform:translateX(-4px); }
+
+@media(max-width:760px) {
+  /* The long H20 now reads as a real beam leaning on the assembly, not a tongue. */
+  .mobile-longerina {
+    left:16px !important;
+    top:48px !important;
+    width:146px !important;
+    height:18px !important;
+    transform:rotate(-24deg) !important;
+    transform-origin:20% 50% !important;
+    z-index:1;
+    border-radius:2px !important;
+    background:linear-gradient(180deg,#d99e22 0 27%,#efb83a 28% 72%,#d99e22 73% 100%) !important;
+    box-shadow:0 8px 15px rgba(0,0,0,.28) !important;
+  }
+  .mobile-longerina:before,
+  .mobile-longerina:after {
+    left:-4px !important;
+    right:-4px !important;
+    height:5px !important;
+    background:linear-gradient(180deg,#f2c34d,#d89d23) !important;
+    border:1px solid rgba(71,52,13,.72);
+    border-radius:2px;
+  }
+  .mobile-longerina:before { top:-3px !important; }
+  .mobile-longerina:after { bottom:-3px !important; }
+  .mobile-longerina span,
+  .mobile-longerina small {
+    top:4px !important;
+    line-height:1 !important;
+    white-space:nowrap;
+  }
+  .mobile-longerina span:nth-child(1) { left:24px !important; }
+  .mobile-longerina span:nth-child(2) { left:70px !important; }
+  .mobile-longerina small {
+    right:12px !important;
+    font-size:6.2px !important;
+    letter-spacing:.03em !important;
+  }
+
+  /* Prop labels get their own safe zones, clear of the blue bands and yellow tape. */
+  .mobile-prop700 .prop-brand {
+    top:59px !important;
+    left:14px !important;
+    font-size:8.5px !important;
+    letter-spacing:.13em !important;
+  }
+  .mobile-prop700 .prop-code {
+    left:33px !important;
+    bottom:60px !important;
+    font-size:12.5px !important;
+  }
+
+  /* Printed vest logo sits just below the reflective stripe instead of floating low. */
+  .mobile-worker .mw-vest-brand { font-weight:900; }
+  .mobile-worker .mw-vest-sub { opacity:.88; }
+
+  /* A stronger final moment: compact construction-status plate instead of loose text. */
+  .mobile-end {
+    left:18px !important;
+    right:auto !important;
+    bottom:108px !important;
+    width:min(220px,58vw) !important;
+    padding:13px 14px 12px 16px;
+    text-align:left !important;
+    background:linear-gradient(90deg,rgba(10,13,14,.94),rgba(10,13,14,.72));
+    border-left:3px solid var(--yellow);
+    border-top:1px solid rgba(255,255,255,.09);
+    border-bottom:1px solid rgba(255,255,255,.09);
+    box-shadow:0 14px 30px rgba(0,0,0,.26);
+    backdrop-filter:blur(4px);
+  }
+  .mobile-end:before {
+    content:"05 · ABSCHLUSS";
+    display:block;
+    margin-bottom:7px;
+    color:#9ba2a4;
+    font-size:7px;
+    font-weight:800;
+    letter-spacing:.18em;
+  }
+  .mobile-end b {
+    font-size:clamp(34px,10vw,46px) !important;
+    line-height:.78 !important;
+    letter-spacing:-.055em !important;
+  }
+  .mobile-end span {
+    margin-top:9px !important;
+    max-width:175px;
+    font-size:7px !important;
+    line-height:1.45;
+    letter-spacing:.13em !important;
+  }
+}
+
+@media(max-width:390px) {
+  .mobile-longerina {
+    left:14px !important;
+    top:49px !important;
+    width:138px !important;
+  }
+  .mobile-longerina span:nth-child(1) { left:21px !important; }
+  .mobile-longerina span:nth-child(2) { left:64px !important; }
+  .mobile-longerina small { right:10px !important; }
+  .mobile-end { width:min(205px,60vw) !important; }
+}
+
+/* 320px safety: allow section-heading grid children to actually shrink. */
+.section-head > * { min-width:0; max-width:100%; }
+@media(max-width:350px) {
+  .section-head h2,
+  .history-title h2 { font-size:40px; }
+}
+
+
+/* ======================================================================
+   V4.3 — MOBILE SCROLL ENGINE FIX
+   Stable viewport/sticky behavior for iOS Safari and Android Chrome.
+   ====================================================================== */
+@media (max-width:760px) {
+  .sticky-stage {
+    height:100vh;
+    height:100svh;
+    height:100dvh;
+    min-height:100svh;
+  }
+
+  /* The scene itself must never become a separate vertical scroll container,
+     otherwise position:sticky can stop following the document on mobile. */
+  .build-scroll,
+  .sticky-stage {
+    overflow-x:clip;
+  }
+  .build-scroll { overflow-y:visible; }
+  .sticky-stage { overflow-y:hidden; }
+
+  /* Let the browser optimize the JS-driven worker without creating a transformed
+     ancestor around the sticky element. */
+  .mobile-worker { will-change:transform; backface-visibility:hidden; }
+}
+
+/* Reduced motion keeps the scroll story functional; only decorative motion is
+   minimized. JS still updates position, copy, progress and the FERTIG state. */
+@media (prefers-reduced-motion:reduce) and (max-width:760px) {
+  .mobile-worker .mw-arm,
+  .mobile-worker .mw-leg,
+  .mobile-worker .mw-thumb,
+  .story-copy,
+  .mobile-end { transition:none!important; }
+}
+
+
+/* V4.3.2 — MAP COORDINATE FIX
+   Outline and project pins share one responsive coordinate plane. */
+.swiss-plot .map-point{position:absolute;left:var(--x);top:var(--y)}
+
+/* ======================================================================
+   V4.3.3 — MAP COORDINATE PLANE FIX
+   The pin layer and the Switzerland SVG must share the exact 760:430
+   coordinate plane at every viewport size. This removes SVG letterboxing
+   drift on tablet/mobile and during live browser resize.
+   ====================================================================== */
+.swiss-plot {
+  left:50% !important;
+  top:50% !important;
+  right:auto !important;
+  bottom:auto !important;
+  inset:auto !important;
+  width:min(92%, 900px) !important;
+  height:auto !important;
+  aspect-ratio:760 / 430;
+  transform:translate(-50%, -50%);
+  overflow:visible;
+}
+.swiss-outline {
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  display:block;
+}
+.swiss-plot .map-point {
+  left:var(--x) !important;
+  top:var(--y) !important;
+}
+
+@media(max-width:980px) {
+  .swiss-plot {
+    width:94% !important;
+  }
+}
+
+@media(max-width:760px) {
+  .swiss-map {
+    min-height:360px !important;
+  }
+  .swiss-plot {
+    width:96% !important;
+  }
+}
+
+@media(max-width:430px) {
+  .swiss-map {
+    min-height:320px !important;
+  }
+  .swiss-plot {
+    width:98% !important;
+  }
+  .map-point {
+    width:20px;
+    height:20px;
+  }
+  .map-point i {
+    inset:5px;
+  }
+}
+
+/* ======================================================================
+   V4.3.4 — MOBILE PROCESS ICON FIX
+   Keep the 3 process icons in one consistent coordinate system on mobile.
+   ====================================================================== */
+@media(max-width:760px){
+  .process-track article{
+    grid-template-columns:94px 1fr !important;
+    gap:0 14px !important;
+    min-height:208px !important;
+    overflow:hidden;
+  }
+  .process-icon{
+    width:108px !important;
+    height:108px !important;
+    margin:0 !important;
+    transform:scale(.72) !important;
+    transform-origin:top left !important;
+  }
+  .process-track h3{
+    font-size:clamp(24px,9vw,34px) !important;
+    line-height:.95;
+    margin:8px 0 10px !important;
+  }
+  .process-track p{
+    font-size:12px !important;
+    line-height:1.5;
+    max-width:28ch;
+  }
+}
+@media(max-width:390px){
+  .process-track article{
+    grid-template-columns:88px 1fr !important;
+    padding:22px 16px !important;
+    gap:0 12px !important;
+  }
+  .process-icon{
+    transform:scale(.68) !important;
+  }
+  .process-track h3{
+    font-size:clamp(22px,8.8vw,31px) !important;
+  }
+}
+
+/* ======================================================================
+   V4.3.5 — MAP PLANE STABILITY FIX
+   JS writes the exact 760:430 pixel height after layout. CSS keeps only
+   placement/width, avoiding absolute-element aspect-ratio edge cases.
+   ====================================================================== */
+.swiss-plot {
+  position:absolute !important;
+  left:50% !important;
+  top:50% !important;
+  right:auto !important;
+  bottom:auto !important;
+  inset:auto !important;
+  width:min(90%, 900px) !important;
+  max-width:90% !important;
+  height:0;
+  aspect-ratio:auto !important;
+  transform:translate(-50%,-50%) !important;
+  overflow:visible !important;
+}
+@media(max-width:980px){
+  .swiss-plot{width:92% !important;max-width:92% !important}
+}
+@media(max-width:760px){
+  .swiss-map{min-height:360px !important}
+  .swiss-plot{width:94% !important;max-width:94% !important}
+}
+@media(max-width:430px){
+  .swiss-map{min-height:320px !important}
+  .swiss-plot{width:96% !important;max-width:96% !important}
+}
+
+/* ======================================================================
+   V4.3.8 — MAP + MOBILE FINAL STABILITY
+   1) Switzerland map no longer depends on JS-calculated height.
+   2) Mobile FERTIG plate lives in a dedicated lower safe zone.
+   ====================================================================== */
+.swiss-map {
+  display:grid !important;
+  place-items:center !important;
+}
+.swiss-plot {
+  position:relative !important;
+  left:auto !important;
+  top:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  inset:auto !important;
+  width:min(90%,900px) !important;
+  max-width:90% !important;
+  height:auto !important;
+  aspect-ratio:760 / 430 !important;
+  transform:none !important;
+  overflow:visible !important;
+  z-index:2;
+}
+.swiss-outline {
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+}
+.swiss-plot .map-point {
+  position:absolute !important;
+  left:var(--x) !important;
+  top:var(--y) !important;
+}
+@media(max-width:980px){
+  .swiss-plot{width:92% !important;max-width:92% !important}
+}
+@media(max-width:760px){
+  .swiss-map{min-height:360px !important}
+  .swiss-plot{width:94% !important;max-width:94% !important}
+}
+@media(max-width:430px){
+  .swiss-map{min-height:320px !important}
+  .swiss-plot{width:96% !important;max-width:96% !important}
+}
+
+@media(max-width:760px){
+  .mobile-end {
+    left:14px !important;
+    right:auto !important;
+    bottom:22px !important;
+    width:min(190px,54vw) !important;
+    padding:10px 12px 10px 13px !important;
+    z-index:16 !important;
+  }
+  .mobile-end:before {
+    margin-bottom:5px !important;
+    font-size:6.5px !important;
+  }
+  .mobile-end b {
+    font-size:clamp(28px,8.5vw,38px) !important;
+    line-height:.82 !important;
+  }
+  .mobile-end span {
+    margin-top:6px !important;
+    font-size:6.5px !important;
+    line-height:1.35 !important;
+  }
+}
+@media(max-width:350px){
+  .mobile-end {
+    left:10px !important;
+    bottom:16px !important;
+    width:min(170px,55vw) !important;
+  }
+}
+
+/* ======================================================================
+   V4.3.10 — VERIFIED MOBILE FINAL / DOKA LABEL RESET
+   Restore the original right-side FERTIG composition and keep DOKA/700
+   physically inside the prop. No other hero geometry is changed.
+   ====================================================================== */
+@media(max-width:760px){
+  /* Keep the final frame clean: the changing copy and progress UI leave,
+     but FERTIG returns to the original right-side composition. */
+  .story-copy,
+  .scroll-hint,
+  .build-ui{
+    transition:opacity .22s ease, transform .22s ease;
+  }
+  .sticky-stage.is-mobile-final .story-copy,
+  .sticky-stage.is-mobile-final .scroll-hint,
+  .sticky-stage.is-mobile-final .build-ui{
+    opacity:0 !important;
+    transform:translateY(8px) !important;
+    pointer-events:none !important;
+  }
+
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    left:auto !important;
+    right:18px !important;
+    bottom:122px !important;
+    width:46vw !important;
+    padding:0 !important;
+    text-align:right !important;
+    background:none !important;
+    border:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+  }
+  .mobile-end:before{display:none !important;content:none !important;}
+  .mobile-end b{
+    font-size:10vw !important;
+    line-height:.85 !important;
+    letter-spacing:-.06em !important;
+  }
+  .mobile-end span{
+    margin-top:8px !important;
+    max-width:none !important;
+    font-size:9px !important;
+    line-height:1.35 !important;
+    letter-spacing:.1em !important;
+  }
+
+  /* DOKA and 700 stay on the prop shaft instead of drifting beside the ladder. */
+  .mobile-prop700 .prop-brand{
+    left:15px !important;
+    top:55px !important;
+    right:auto !important;
+    transform:rotate(90deg) !important;
+    transform-origin:left top !important;
+    font-size:8.5px !important;
+    line-height:1 !important;
+    letter-spacing:.11em !important;
+    z-index:10 !important;
+  }
+  .mobile-prop700 .prop-code{
+    left:34px !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:62px !important;
+    transform:rotate(90deg) !important;
+    transform-origin:left top !important;
+    font-size:12px !important;
+    line-height:1 !important;
+    z-index:10 !important;
+  }
+}
+
+@media(max-width:390px){
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    right:14px !important;
+    bottom:118px !important;
+    width:47vw !important;
+  }
+}
+
+@media(max-width:350px){
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    right:10px !important;
+    bottom:112px !important;
+    width:48vw !important;
+  }
+}
+
+/* Final QA polish: once FERTIG is active, the previous helper UI is fully
+   removed from paint, and the right-side wordmark sits below the worker. */
+@media(max-width:760px){
+  .sticky-stage.is-mobile-final .story-copy,
+  .sticky-stage.is-mobile-final .scroll-hint,
+  .sticky-stage.is-mobile-final .build-ui{
+    visibility:hidden !important;
+  }
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    bottom:82px !important;
+  }
+}
+@media(max-width:390px){
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    bottom:78px !important;
+  }
+}
+@media(max-width:350px){
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    bottom:74px !important;
+  }
+}
+
+/* ======================================================================
+   V4.3.11 — MOBILE SCENE SPACING + EARLIER FERTIG
+   Keep the left story visible while FERTIG enters on the right. Separate
+   ladder, DOKA 700 and H20 4.90 so the top of the scene can breathe.
+   ====================================================================== */
+@media(max-width:760px){
+  /* Final message returns to the original right-side composition. */
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    left:auto !important;
+    right:18px !important;
+    top:auto !important;
+    bottom:122px !important;
+    width:46vw !important;
+    padding:0 !important;
+    text-align:right !important;
+    background:none !important;
+    border:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+  }
+
+  /* Do not empty the left side when the last stage is reached. */
+  .sticky-stage.is-mobile-final .story-copy,
+  .sticky-stage.is-mobile-final .scroll-hint,
+  .sticky-stage.is-mobile-final .build-ui{
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:none !important;
+    pointer-events:auto !important;
+  }
+
+  /* Ladder stays on the far right and no longer shares the prop's axis. */
+  .ladder{
+    right:2% !important;
+    width:66px !important;
+  }
+
+  /* Move the DOKA assembly left as one unit, leaving a clean gap to ladder. */
+  .mobile-doka-scene{
+    right:40px !important;
+    top:88px !important;
+    width:188px !important;
+    height:286px !important;
+    transform:none !important;
+    transform-origin:top right !important;
+  }
+
+  /* The 700 prop becomes its own vertical object left of the ladder. */
+  .mobile-prop700{
+    right:54px !important;
+    top:2px !important;
+  }
+
+  /* H20 4.90 sits above-left, instead of being wedged between prop/ladder. */
+  .mobile-longerina{
+    left:-8px !important;
+    top:38px !important;
+    width:138px !important;
+    height:18px !important;
+    transform:rotate(-18deg) !important;
+    transform-origin:18% 50% !important;
+  }
+}
+
+@media(max-width:390px){
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    right:14px !important;
+    bottom:118px !important;
+    width:47vw !important;
+  }
+  .ladder{right:2% !important;width:64px !important;}
+  .mobile-doka-scene{right:36px !important;top:88px !important;transform:none !important;}
+  .mobile-longerina{left:-10px !important;top:40px !important;width:134px !important;}
+}
+
+@media(max-width:350px){
+  .mobile-end,
+  .sticky-stage.is-mobile-final .mobile-end{
+    right:10px !important;
+    bottom:114px !important;
+    width:48vw !important;
+  }
+  .ladder{right:1% !important;width:60px !important;}
+  .mobile-doka-scene{right:30px !important;top:86px !important;transform:scale(.92) !important;}
+}
+
+/* ======================================================================
+   V4.3.13 — MOBILE WORKER / LADDER AXIS FIX
+   Worker center follows the actual ladder center after V4.3.11 moved
+   the ladder to the far right. Do not use the old 86/89% worker axis.
+   ====================================================================== */
+@media(max-width:760px){
+  .mobile-worker{
+    left:calc(98% - 89px) !important;
+  }
+}
+@media(max-width:390px){
+  .mobile-worker{
+    left:calc(98% - 84px) !important;
+  }
+}
+@media(max-width:350px){
+  .mobile-worker{
+    left:calc(99% - 82px) !important;
+  }
+}
+
+
+/* ======================================================================
+   V4.3.14 — MOBILE H20 / DOKA LABEL CLEANUP
+   Keep all beam markings readable on the narrow mobile H20 beam.
+   ====================================================================== */
+@media(max-width:760px){
+  .mobile-longerina span{
+    top:4px !important;
+    font-size:7.1px !important;
+    letter-spacing:.03em !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+  }
+  .mobile-longerina span:nth-child(1){ left:20px !important; }
+  .mobile-longerina span:nth-child(2){ left:61px !important; }
+
+  .mobile-longerina small{
+    top:4px !important;
+    right:3px !important;
+    font-size:5.6px !important;
+    letter-spacing:0 !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+  }
+}
+
+@media(max-width:390px){
+  .mobile-longerina span:nth-child(1){ left:17px !important; }
+  .mobile-longerina span:nth-child(2){ left:55px !important; }
+  .mobile-longerina small{
+    right:3px !important;
+    font-size:5.4px !important;
+  }
+}
+
+/* ======================================================================
+   V4.3.15 — MOBILE H20 LABEL LAYOUT
+   DOKA on both ends, H20 · 4.90 centered.
+   ====================================================================== */
+@media(max-width:760px){
+  .mobile-longerina span:nth-child(1){
+    left:12px !important;
+    right:auto !important;
+  }
+  .mobile-longerina span:nth-child(2){
+    left:auto !important;
+    right:10px !important;
+  }
+  .mobile-longerina small{
+    left:50% !important;
+    right:auto !important;
+    top:4px !important;
+    transform:translateX(-50%) !important;
+    font-size:5.6px !important;
+    letter-spacing:0 !important;
+    text-align:center !important;
+  }
+}
+@media(max-width:390px){
+  .mobile-longerina span:nth-child(1){ left:10px !important; }
+  .mobile-longerina span:nth-child(2){ right:8px !important; }
+  .mobile-longerina small{ font-size:5.3px !important; }
+}
+
+/* ======================================================================
+   V4.3.16 — MOBILE BEAM BASELINE + PROP LABEL AXIS
+   Align H20 · 4.90 optically with both DOKA marks and keep all DOKA 700
+   markings on the exact 42px prop centre axis.
+   ====================================================================== */
+@media(max-width:760px){
+  /* Smaller H20 text needs a slightly lower top value to share the visual
+     baseline with the larger DOKA labels. */
+  .mobile-longerina small{
+    top:5.5px !important;
+  }
+
+  /* Centre the yellow DOKA tape on the 42px prop. */
+  .mobile-prop700 .prop-tape{
+    left:50% !important;
+    transform:translateX(-50%) !important;
+  }
+
+  /* Centre both vertical blue markings on the same 21px shaft axis. */
+  .mobile-prop700 .prop-brand{
+    left:-2px !important;
+    width:46px !important;
+    text-align:center !important;
+    transform:rotate(90deg) !important;
+    transform-origin:center center !important;
+  }
+  .mobile-prop700 .prop-code{
+    left:1px !important;
+    width:40px !important;
+    text-align:center !important;
+    transform:rotate(90deg) !important;
+    transform-origin:center center !important;
+  }
+}
+@media(max-width:390px){
+  .mobile-longerina small{
+    top:5.3px !important;
+  }
+}
+
+
+/* ======================================================================
+   V4.3.18 — LEISTUNGEN HERO: DOKA STAXO 100
+   Replaces the old H20 + 700 prop illustration with a clean vector tower.
+   ====================================================================== */
+.page-services .service-staxo-drawing{
+  right:2.5vw;
+  bottom:4%;
+  width:min(650px,47vw);
+  height:74%;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  pointer-events:none;
+}
+.page-services .staxo-visual{
+  width:100%;
+  height:100%;
+  overflow:visible;
+  filter:saturate(.96);
+}
+.page-services .staxo-frame{
+  fill:rgba(122,132,138,.08);
+  stroke:#8f999e;
+  stroke-width:6;
+  stroke-linejoin:round;
+}
+.page-services .staxo-post{
+  fill:none;
+  stroke:url(#staxoSteel);
+  stroke-width:10;
+  stroke-linecap:round;
+}
+.page-services .staxo-brace{
+  fill:none;
+  stroke:#c6cccf;
+  stroke-width:4.6;
+  stroke-linecap:round;
+  opacity:.9;
+}
+.page-services .staxo-cross{
+  fill:none;
+  stroke:#858f94;
+  stroke-width:5;
+  stroke-linecap:round;
+}
+.page-services .staxo-beam{
+  fill:url(#staxoYellow);
+  stroke:#77500e;
+  stroke-width:2;
+}
+.page-services .staxo-topline{
+  fill:#e0a72b;
+  opacity:.96;
+}
+.page-services .staxo-feet path{
+  fill:none;
+  stroke:#c5cbce;
+  stroke-width:6;
+  stroke-linecap:round;
+}
+.page-services .staxo-ladder path{
+  fill:none;
+  stroke:#e0ad30;
+  stroke-width:6;
+  stroke-linecap:round;
+}
+.page-services .staxo-mark rect{
+  fill:#e0ad30;
+  stroke:#7c5511;
+  stroke-width:1;
+}
+.page-services .staxo-mark text{
+  fill:#17335c;
+  font:900 9px Arial,sans-serif;
+  letter-spacing:1.4px;
+  text-anchor:middle;
+}
+.page-services .staxo-mark .staxo-code{
+  fill:#d8ab36;
+  font-size:9px;
+  letter-spacing:1.1px;
+}
+
+@media(max-width:1100px){
+  .page-services .service-staxo-drawing{
+    right:-1vw;
+    width:49vw;
+    height:68%;
+  }
+}
+@media(max-width:760px){
+  .page-services .service-staxo-drawing{
+    right:-64px;
+    bottom:0;
+    width:68vw;
+    height:55%;
+    z-index:3;
+    opacity:.96;
+  }
+  .page-services .staxo-frame{stroke-width:7}
+  .page-services .staxo-post{stroke-width:11}
+  .page-services .staxo-brace{stroke-width:5.2}
+  .page-services .staxo-ladder path{stroke-width:7}
+  .page-services .staxo-mark .staxo-code{font-size:10px}
+}
+@media(max-width:390px){
+  .page-services .service-staxo-drawing{
+    right:-70px;
+    width:72vw;
+    height:52%;
+  }
+}
+
+
+/* V4.3.19 — STAXO silhouette and label polish */
+.page-services .staxo-mark .staxo-code{paint-order:stroke fill;stroke:#3a2a08;stroke-width:1.6px;stroke-linejoin:round;}
+
+
+/* V4.3.20 — STAXO composition polish */
+.page-services .service-staxo-drawing{right:.6vw;bottom:2%;width:min(760px,56vw);height:82%;}
+.page-services .staxo-mark .staxo-code{paint-order:stroke fill;stroke:#2f2407;stroke-width:1.8px;stroke-linejoin:round;}
+@media(max-width:1100px){.page-services .service-staxo-drawing{right:-.5vw;width:53vw;height:76%;}}
+
+
+/* ======================================================================
+   V4.3.21 — STAXO GEOMETRY REBUILD
+   One perspective system, mirrored side frames, clean X braces and integrated ladder.
+   ====================================================================== */
+.page-services .service-staxo-drawing{
+  right:1vw !important;
+  bottom:1% !important;
+  width:min(790px,59vw) !important;
+  height:88% !important;
+}
+.page-services .staxo-visual{
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+.page-services .staxo-frame{
+  fill:rgba(118,128,133,.055);
+  stroke:#7f898e;
+  stroke-width:5;
+  stroke-linejoin:round;
+}
+.page-services .staxo-post{
+  fill:none;
+  stroke:url(#staxoSteel);
+  stroke-width:9;
+  stroke-linecap:round;
+  filter:url(#staxoMetalShadow);
+}
+.page-services .staxo-brace{
+  fill:none;
+  stroke:#bbc2c5;
+  stroke-width:4.2;
+  stroke-linecap:round;
+  opacity:.92;
+}
+.page-services .staxo-beam{
+  fill:url(#staxoYellow);
+  stroke:#73500f;
+  stroke-width:2;
+}
+.page-services .staxo-topline{
+  fill:#dca527;
+  opacity:.96;
+}
+.page-services .staxo-feet path{
+  fill:none;
+  stroke:#c3c9cc;
+  stroke-width:5.5;
+  stroke-linecap:round;
+}
+.page-services .staxo-ground-shadow ellipse{
+  fill:#000;
+  opacity:.24;
+}
+.page-services .staxo-ladder-mounts path{
+  fill:none;
+  stroke:#7e898e;
+  stroke-width:3.6;
+  stroke-linecap:round;
+}
+.page-services .staxo-ladder path{
+  fill:none;
+  stroke:#dfaa2d;
+  stroke-width:4.6;
+  stroke-linecap:round;
+}
+.page-services .staxo-mark rect{
+  fill:#e0aa2c;
+  stroke:#302407;
+  stroke-width:2;
+}
+.page-services .staxo-mark text{
+  text-anchor:middle;
+  font-family:Arial,sans-serif;
+  font-weight:900;
+  fill:#142a4d;
+}
+.page-services .staxo-mark .staxo-brand{
+  font-size:10px;
+  letter-spacing:1.6px;
+}
+.page-services .staxo-mark .staxo-code{
+  font-size:8.3px;
+  letter-spacing:1.15px;
+  stroke:none;
+  paint-order:normal;
+}
+@media(max-width:1100px){
+  .page-services .service-staxo-drawing{
+    right:-1vw !important;
+    width:56vw !important;
+    height:82% !important;
+  }
+}
+@media(max-width:760px){
+  .page-services .service-staxo-drawing{
+    right:-58px !important;
+    bottom:0 !important;
+    width:74vw !important;
+    height:60% !important;
+  }
+  .page-services .staxo-post{stroke-width:10}
+  .page-services .staxo-brace{stroke-width:4.7}
+  .page-services .staxo-ladder path{stroke-width:5}
+}
+@media(max-width:390px){
+  .page-services .service-staxo-drawing{
+    right:-62px !important;
+    width:77vw !important;
+    height:58% !important;
+  }
+}
+
+/* ======================================================================
+   V4.3.22 — INNER PAGES MOBILE VIEWPORT CONTAINMENT
+   Keep every inner-page hero and decorative illustration inside the iPhone
+   viewport. Home scroll-story is intentionally untouched.
+   ====================================================================== */
+body.inner-page{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden !important;
+}
+body.inner-page .inner-main,
+body.inner-page .page-hero,
+body.inner-page .section-pad,
+body.inner-page .page-next,
+body.inner-page .page-cta{
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+@media(max-width:760px){
+  body.inner-page .page-hero{
+    width:100%;
+    max-width:100vw;
+    overflow:hidden !important;
+  }
+
+  /* Text must never create horizontal page width. */
+  body.inner-page .page-hero-copy,
+  body.inner-page .page-hero-copy h1,
+  body.inner-page .page-hero-copy p,
+  body.inner-page .page-next a,
+  body.inner-page .page-next a span,
+  body.inner-page .page-cta,
+  body.inner-page .page-cta h2,
+  body.inner-page .service-detail,
+  body.inner-page .service-detail > div,
+  body.inner-page .partner-service-grid article,
+  body.inner-page .partner-service-grid h3{
+    min-width:0;
+    max-width:100%;
+  }
+
+  body.inner-page .partner-service-grid h3,
+  body.inner-page .service-detail h2,
+  body.inner-page .page-next a span{
+    overflow-wrap:anywhere;
+    word-break:normal;
+    hyphens:auto;
+  }
+
+  /* References: keep the technical frame completely inside the screen. */
+  .page-references .reference-lines{
+    right:10px !important;
+    top:38% !important;
+    width:44vw !important;
+    max-width:176px !important;
+    height:39% !important;
+  }
+  .page-references .reference-lines b{
+    right:9px !important;
+    font-size:18px !important;
+  }
+
+  /* News: the giant 30 stays decorative, but no longer exits right. */
+  .page-news .anniversary-mark{
+    right:12px !important;
+    bottom:14% !important;
+    gap:7px !important;
+    max-width:52vw;
+  }
+  .page-news .anniversary-mark strong{
+    font-size:min(34vw,136px) !important;
+  }
+  .page-news .anniversary-mark span{
+    font-size:8px !important;
+    letter-spacing:.12em !important;
+    margin-bottom:7px !important;
+  }
+
+  /* Jobs: all three workers stay inside the hero. */
+  .page-jobs .jobs-illustration{
+    right:0 !important;
+    width:51vw !important;
+    max-width:215px !important;
+    height:53% !important;
+  }
+
+  /* 3 Point blueprint: no negative right offset on phones. */
+  .page-partner .blueprint-visual{
+    right:0 !important;
+    top:39% !important;
+    width:48vw !important;
+    max-width:195px !important;
+    height:38% !important;
+  }
+  .page-partner .partner-service-grid h3{
+    font-size:clamp(28px,8.2vw,36px) !important;
+    line-height:.96;
+  }
+
+  /* Contact postcode must be fully readable. */
+  .page-contact .contact-hero-mark{
+    right:14px !important;
+    bottom:18% !important;
+    max-width:48vw;
+  }
+  .page-contact .contact-hero-mark b{
+    font-size:min(30vw,120px) !important;
+    letter-spacing:-.07em !important;
+  }
+  .page-contact .contact-hero-mark span{
+    font-size:9px !important;
+    letter-spacing:.18em !important;
+  }
+
+  /* Leistungen / STAXO: keep the rebuilt tower fully inside the viewport. */
+  .page-services .service-staxo-drawing{
+    right:0 !important;
+    bottom:1% !important;
+    width:56vw !important;
+    max-width:235px !important;
+    height:55% !important;
+  }
+  .page-services .staxo-visual{
+    overflow:visible;
+  }
+
+  /* Team/history pages use the same containment rule. */
+  .page-team .crew-illustration{
+    right:0 !important;
+    width:54vw !important;
+    max-width:220px !important;
+  }
+  .page-history .founders-illustration{
+    right:0 !important;
+    width:50vw !important;
+    max-width:205px !important;
+  }
+}
+
+@media(max-width:390px){
+  .page-references .reference-lines{right:8px !important;width:43vw !important;}
+  .page-partner .blueprint-visual{right:0 !important;width:47vw !important;}
+  .page-jobs .jobs-illustration{right:0 !important;width:50vw !important;}
+  .page-services .service-staxo-drawing{right:0 !important;width:55vw !important;}
+  .page-team .crew-illustration{right:0 !important;}
+  .page-history .founders-illustration{right:0 !important;}
+}
