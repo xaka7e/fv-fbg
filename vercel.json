@@ -1,26 +1,69 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
   "cleanUrls": false,
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {"key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet"},
-        {"key": "X-Content-Type-Options", "value": "nosniff"},
-        {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"}
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive, nosnippet"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
     }
   ],
   "redirects": [
-    {"source": "/ref-in-bearbeitung/", "destination": "/referenzen/index.html", "permanent": true},
-    {"source": "/team.html", "destination": "/ueber-uns/team/index.html", "permanent": true},
-    {"source": "/firmengeschichte.html", "destination": "/ueber-uns/firmengeschichte/index.html", "permanent": true},
-    {"source": "/leistungen.html", "destination": "/leistungen/index.html", "permanent": true},
-    {"source": "/referenzen.html", "destination": "/referenzen/index.html", "permanent": true},
-    {"source": "/aktuell.html", "destination": "/aktuell/index.html", "permanent": true},
-    {"source": "/offene-stellen.html", "destination": "/offene-stellen/index.html", "permanent": true},
-    {"source": "/kontakt.html", "destination": "/kontakt/index.html", "permanent": true},
-    {"source": "/partnerfirma.html", "destination": "/partnerfirma/index.html", "permanent": true}
+    {
+      "source": "/ref-in-bearbeitung/",
+      "destination": "/referenzen/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/team.html",
+      "destination": "/ueber-uns/team/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/firmengeschichte.html",
+      "destination": "/ueber-uns/firmengeschichte/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/leistungen.html",
+      "destination": "/leistungen/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/referenzen.html",
+      "destination": "/referenzen/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/aktuell.html",
+      "destination": "/aktuell/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/offene-stellen.html",
+      "destination": "/offene-stellen/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/kontakt.html",
+      "destination": "/kontakt/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/partnerfirma.html",
+      "destination": "/partnerfirma/index.html",
+      "permanent": true
+    }
   ]
 }
