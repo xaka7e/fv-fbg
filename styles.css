@@ -4262,3 +4262,47 @@ body p:not(.eyebrow):not(.hero-fact):not(.rights-note) {
   }
 }
 
+/* JOBS CHARACTER ARMS 2026-09-21 */
+/* У персонажей на странице вакансий появились рукава и кисти.
+   Предметы остаются сверху, поэтому теперь они выглядят реально удерживаемыми. */
+.page-jobs .job-person .arm{
+  position:absolute;
+  top:112px;
+  width:24px;
+  height:116px;
+  z-index:3;
+  border-radius:14px;
+  background:linear-gradient(180deg,#dfad35,#c58d22);
+  transform-origin:50% 10%;
+}
+.page-jobs .job-person .hand{
+  position:absolute;
+  width:24px;
+  height:24px;
+  z-index:5;
+  border-radius:50%;
+  background:#b97d5f;
+}
+
+/* Слева: рабочий действительно держит каску одной рукой,
+   вторая рука естественно опущена рядом с корпусом. */
+.page-jobs .job-helmet .arm-left{left:23px;transform:rotate(23deg)}
+.page-jobs .job-helmet .hand-left{left:12px;top:192px}
+.page-jobs .job-helmet .arm-right{left:116px;transform:rotate(-4deg)}
+.page-jobs .job-helmet .hand-right{left:126px;top:224px}
+
+/* По центру: ровно две руки держат план с двух сторон. */
+.page-jobs .job-plan .arm-left{left:22px;transform:rotate(-24deg)}
+.page-jobs .job-plan .hand-left{left:39px;top:186px}
+.page-jobs .job-plan .arm-right{left:114px;transform:rotate(24deg)}
+.page-jobs .job-plan .hand-right{left:128px;top:183px}
+
+/* Справа: договор удерживается обеими руками, без "висящего" листа. */
+.page-jobs .job-contract .arm-left{left:22px;transform:rotate(-31deg)}
+.page-jobs .job-contract .hand-left{left:69px;top:194px}
+.page-jobs .job-contract .arm-right{left:114px;transform:rotate(17deg)}
+.page-jobs .job-contract .hand-right{left:136px;top:190px}
+
+/* На маленьких экранах руки масштабируются вместе с фигурой,
+   поэтому отдельной геометрии для mobile не требуется. */
+
