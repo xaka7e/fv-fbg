@@ -4152,3 +4152,17 @@ body.inner-page .page-cta{
   }
 }
 
+/* SMALL LABEL CONTRAST 2026-09-21 */
+/* Маленькие золотые подписи на светлом фоне: сохраняем фирменный акцент,
+   но затемняем его до читаемого уровня. */
+.work-process .process-track article > span,
+.history .timeline b {
+  color: #765817;
+  font-weight: 800;
+}
+
+.news .news-card > span {
+  color: #705619;
+  font-weight: 800;
+}
+
