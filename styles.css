@@ -3980,3 +3980,66 @@ body.inner-page .page-cta{
   }
 }
 
+/* OFFENE STELLEN READABILITY 2026-09-21 */
+/* Карточки вакансий: тот же шрифт, но больше воздуха и заметно выше читаемость. */
+.page-jobs .jobs-large article {
+  padding: 34px 32px 30px;
+}
+
+/* Описание вакансии: чуть крупнее, плотнее и темнее на светлом фоне. */
+.page-jobs .jobs-large article p {
+  margin: 14px 0 0;
+  max-width: 34rem;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.62;
+  color: #4c5356;
+}
+
+/* Маленькая подпись OFFENE STELLE / BÜRO PROJEKTE тоже должна читаться. */
+.page-jobs .jobs-large article small {
+  font-size: 9px;
+  font-weight: 600;
+  color: #6f777a;
+}
+
+/* На странице вакансий третью карточку не приглушаем общей opacity. */
+.page-jobs .jobs-large .job-alt {
+  opacity: 1;
+}
+
+/* Кнопку оставляем в прежнем стиле, но немного усиливаем размер. */
+.page-jobs .jobs-large article a {
+  font-size: 11px;
+}
+
+/* Планшет и телефон: одна колонка, аккуратные поля без прилипания к краям. */
+@media (max-width: 980px) {
+  .page-jobs .jobs-large article {
+    min-height: 280px;
+    padding: 30px 26px 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  .page-jobs .jobs-page.section-pad {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .page-jobs .jobs-large article {
+    min-height: 250px;
+    padding: 28px 22px 30px;
+  }
+
+  .page-jobs .jobs-large article p {
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: none;
+  }
+
+  .page-jobs .jobs-large article a {
+    margin-top: 30px;
+  }
+}
+
