@@ -67,6 +67,8 @@
     <path class="staxo-brace" d="M275 94 L385 392 M385 94 L275 392"/>
     <path class="staxo-beam" d="M260 80 H400 V102 H260 Z"/>
     <path class="staxo-topline" d="M264 72 H396 V80 H264 Z"/>
+    <!-- STAXO 100 — часть средней балки, чуть ниже верхней полоски. -->
+    <text x="330" y="97" fill="#17335c" font-family="Arial,Helvetica,sans-serif" font-size="12.5" font-weight="900" letter-spacing=".7" text-anchor="middle">STAXO 100</text>
   </g>
 
   <!-- RIGHT STAXO FRAME: exact mirror of left -->
@@ -76,6 +78,8 @@
     <path class="staxo-brace" d="M425 105 L510 390 M510 125 L425 370"/>
     <path class="staxo-beam" d="M413 83 L522 107 L517 127 L408 103 Z"/>
     <path class="staxo-topline" d="M411 75 L520 99 L517 108 L408 83 Z"/>
+    <!-- DOKA — надпись является частью правой балки, без отдельной таблички. -->
+    <text x="466" y="111" fill="#17335c" font-family="Arial,Helvetica,sans-serif" font-size="13.5" font-weight="900" letter-spacing="2" text-anchor="middle" transform="rotate(12 466 111)">DOKA</text>
   </g>
 
   <!-- screw jacks and base plates -->
@@ -84,20 +88,13 @@
     <path d="M134 430 H166 M219 410 H251 M259 436 H291 M369 436 H401 M409 410 H441 M494 430 H526"/>
   </g>
 
-  <!-- ladder is inside the center frame, fixed with visible mounts -->
+  <!-- Лестница идёт непрерывно от верхней балки до пола. -->
   <g class="staxo-ladder-mounts">
     <path d="M275 155 H319 M341 155 H385 M275 244 H319 M341 244 H385 M275 333 H319 M341 333 H385"/>
   </g>
   <g class="staxo-ladder">
-    <path d="M319 126 V365 M341 126 V365"/>
-    <path d="M319 149 H341 M319 173 H341 M319 197 H341 M319 221 H341 M319 245 H341 M319 269 H341 M319 293 H341 M319 317 H341 M319 341 H341"/>
-  </g>
-
-  <!-- unified system label -->
-  <g class="staxo-mark" transform="rotate(12 468 108)">
-    <rect x="421" y="91" width="98" height="34" rx="3"/>
-    <text class="staxo-brand" x="470" y="105">DOKA</text>
-    <text class="staxo-code" x="470" y="118">STAXO 100</text>
+    <path d="M319 102 V436 M341 102 V436"/>
+    <path d="M319 126 H341 M319 150 H341 M319 174 H341 M319 198 H341 M319 222 H341 M319 246 H341 M319 270 H341 M319 294 H341 M319 318 H341 M319 342 H341 M319 366 H341 M319 390 H341 M319 414 H341"/>
   </g>
 </g>
 </svg>
