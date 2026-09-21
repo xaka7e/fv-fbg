@@ -3887,3 +3887,55 @@ body.inner-page .page-cta{
   .page-team .crew-illustration{right:0 !important;}
   .page-history .founders-illustration{right:0 !important;}
 }
+
+
+/* HISTORY READABILITY 2026-09-21 */
+/* Читаемость текста в истории компании: шрифт тот же, но описания чуть крупнее и плотнее. */
+.page-history .timeline-full p {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.68;
+  color: #454b4e;
+  max-width: 280px;
+}
+
+/* На широком экране даём тексту воздух после вертикальных разделителей. */
+@media (min-width: 1101px) {
+  .page-history .timeline-full article:not(:first-child) {
+    padding-left: clamp(20px, 1.6vw, 28px);
+  }
+}
+
+/* На средней ширине сетка становится 3-колоночной: 1-й элемент каждой строки без лишнего левого отступа. */
+@media (min-width: 981px) and (max-width: 1100px) {
+  .page-history .timeline-full article {
+    padding-left: clamp(18px, 2vw, 24px);
+  }
+  .page-history .timeline-full article:nth-child(3n + 1) {
+    padding-left: 0;
+  }
+}
+
+/* На планшете две колонки: правой колонке добавляем отступ от разделителя. */
+@media (min-width: 761px) and (max-width: 980px) {
+  .page-history .timeline-full article {
+    padding-left: 0;
+  }
+  .page-history .timeline-full article:nth-child(even) {
+    padding-left: clamp(22px, 3vw, 30px);
+  }
+}
+
+/* На телефоне остаётся одна колонка — сохраняем компактный фирменный ритм. */
+@media (max-width: 760px) {
+  .page-history .timeline-full p {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.7;
+    max-width: 34rem;
+  }
+  .page-history .timeline-full article {
+    padding-left: 18px;
+    padding-right: 10px;
+  }
+}
