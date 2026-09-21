@@ -9,6 +9,9 @@
   Я не стал агрессивно объединять их, чтобы не сломать уже рабочую v7.2.
 */
 
+/* Обычные описания сайта используем в Manrope, заголовки остаются в Inter. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap');
+
 /* Главные цвета и переменные сайта. Общую палитру удобнее менять здесь. */
 :root {
   --bg:#090b0c;
@@ -4164,5 +4167,98 @@ body.inner-page .page-cta{
 .news .news-card > span {
   color: #705619;
   font-weight: 800;
+}
+
+/* MANROPE COPY SYSTEM 2026-09-21 */
+/* Двухшрифтовая система:
+   Inter = заголовки / навигация / технические подписи.
+   Manrope = обычный читаемый текст и описания. */
+:root {
+  --copy-font: "Manrope", Inter, Arial, sans-serif;
+}
+
+/* Основные абзацы и описания. Технические подписи специально исключены. */
+body p:not(.eyebrow):not(.hero-fact):not(.rights-note) {
+  font-family: var(--copy-font);
+}
+
+/* Основной читаемый ритм для контентных описаний. */
+.section-intro,
+.lead,
+.about-card p,
+.about-portal p,
+.service-grid p,
+.service-detail p,
+.current-list p,
+.process-track p,
+.timeline p,
+.timeline-full p,
+.team-person p,
+.news-card p,
+.news-feature p,
+.news-empty p,
+.jobs article p,
+.partner-copy p,
+.partner-service-grid p,
+.values-strip p,
+.contact-grid p,
+.legal-copy p {
+  font-family: var(--copy-font);
+  font-weight: 500;
+  letter-spacing: .005em;
+}
+
+/* Маленькие описания не должны становиться микроскопическими. */
+.about-card p,
+.service-grid p,
+.process-track p,
+.timeline p,
+.timeline-full p,
+.jobs article p,
+.values-strip p {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* Hero/вводные тексты — чуть легче, чтобы не спорить с крупным заголовком. */
+.lead,
+.section-intro {
+  font-weight: 500;
+  letter-spacing: .002em;
+}
+
+/* Технические элементы принудительно оставляем в Inter. */
+.eyebrow,
+.hero-fact,
+.numbers-copy p,
+.rights-note,
+.jobs small,
+.timeline b,
+.process-track article > span,
+.news-card > span,
+.brand,
+.nav,
+.menu-btn {
+  font-family: Inter, Arial, sans-serif;
+}
+
+/* На телефоне обычный текст остаётся читаемым. */
+@media (max-width: 760px) {
+  .about-card p,
+  .service-grid p,
+  .service-detail p,
+  .process-track p,
+  .timeline p,
+  .timeline-full p,
+  .news-card p,
+  .news-feature p,
+  .jobs article p,
+  .partner-service-grid p,
+  .values-strip p,
+  .section-intro,
+  .lead {
+    font-size: 15px;
+    line-height: 1.68;
+  }
 }
 
