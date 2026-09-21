@@ -4043,3 +4043,24 @@ body.inner-page .page-cta{
   }
 }
 
+/* OFFENE STELLEN INTRO READABILITY 2026-09-21 */
+/* Вводный текст над вакансиями: на светлом фоне должен читаться уверенно. */
+.page-jobs .jobs-page .section-intro {
+  color: #4a5053;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.68;
+  max-width: 540px;
+}
+
+/* На телефоне сохраняем тот же контраст и чуть компактнее строку. */
+@media (max-width: 760px) {
+  .page-jobs .jobs-page .section-intro {
+    color: #454b4e;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.65;
+    max-width: none;
+  }
+}
+
