@@ -105,11 +105,12 @@
 <path d="M1155 145l74-78 106 78" stroke="#c89a29" stroke-width="6"></path>
 </g>
 <g class="crane-brand" transform="translate(0 30)">
-<rect fill="#e0ad30" height="68" rx="6" width="180" x="1042" y="94"></rect>
-<image height="32" href="assets/fbg-mark.png" preserveaspectratio="xMidYMid meet" width="32" x="1054" y="110"/><!-- Текст на табличке крана рисуем прямо в основном SVG:
-     так он остаётся чётким и читаемым при масштабировании. -->
-<text fill="#17191a" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="800" letter-spacing="-.45" x="1088" y="126">Fbg Bau GmbH</text>
-<text fill="#17191a" font-family="Arial,Helvetica,sans-serif" font-size="7.5" font-weight="800" letter-spacing="1.15" x="1088" y="140">SCHALUNGSUNTERNEHMUNG</text>
+<!-- Табличку сделали шире, чтобы обе строки всегда оставались внутри жёлтого поля. -->
+<rect fill="#e0ad30" height="72" rx="6" width="245" x="1025" y="92"></rect>
+<image height="38" href="assets/fbg-mark.png" preserveaspectratio="xMidYMid meet" width="38" x="1038" y="108"/>
+<!-- textLength фиксирует реальную ширину текста и не даёт ему уехать за край таблички. -->
+<text fill="#17191a" font-family="Arial,Helvetica,sans-serif" font-size="16.5" font-weight="800" lengthAdjust="spacingAndGlyphs" textLength="174" x="1086" y="126">Fbg Bau GmbH</text>
+<text fill="#17191a" font-family="Arial,Helvetica,sans-serif" font-size="7.2" font-weight="800" lengthAdjust="spacingAndGlyphs" textLength="174" x="1086" y="142">SCHALUNGSUNTERNEHMUNG</text>
 </g>
 </g>
 <!-- synchronized lifting system: trolley, cable, hook, slings and panel -->
